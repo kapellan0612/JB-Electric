@@ -442,9 +442,10 @@ input, select, textarea, button { font-family: inherit; }
   font-size: 66px;
 }
 
-/* Hero photo swap — desktop landscape vs mobile portrait */
-.jb-hero-photo-desktop { display: block; }
-.jb-hero-photo-mobile  { display: none; }
+/* Hero photo swap — desktop landscape vs mobile portrait
+   !important required: inline styles on the <img> tag would otherwise win. */
+.jb-hero-photo-desktop { display: block !important; }
+.jb-hero-photo-mobile  { display: none !important; }
 
 /* Nav — desktop visible / hamburger hidden by default */
 .jb-nav-desktop       { display: flex; gap: 32px; flex: 1; }
@@ -472,13 +473,13 @@ input, select, textarea, button { font-family: inherit; }
   .jb-hamburger         { display: flex; align-items: center; justify-content: center; margin-left: auto; }
   .jb-mobile-menu       { display: flex; flex-direction: column; padding: 12px 20px 20px; background: rgba(14,42,92,0.98); border-top: 1px solid rgba(255,208,14,0.15); gap: 2px; }
 
-  .jb-hero-card-hide    { display: none; }
+  .jb-hero-card-hide    { display: none !important; }
   .jb-cta-strip-inner   { flex-direction: column; align-items: flex-start; gap: 16px; }
   .jb-cta-actions       { margin-left: 0 !important; }
 
   /* Swap to portrait hero photo; mobile image has its own gradient so dim the overlay */
-  .jb-hero-photo-desktop { display: none; }
-  .jb-hero-photo-mobile  { display: block; object-position: center right; }
+  .jb-hero-photo-desktop { display: none !important; }
+  .jb-hero-photo-mobile  { display: block !important; object-position: center right; }
   .jb-hero-leftfade      { background: linear-gradient(180deg, rgba(14,42,92,0.30) 0%, rgba(14,42,92,0) 60%) !important; }
 
   .jb-section-px        { padding-left: 20px !important; padding-right: 20px !important; }
