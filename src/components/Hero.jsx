@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import heroElectrician from '../assets/hero-electrician.png';
+import heroMobile from '../assets/mobilehero.png';
 
 export default function Hero({ setScreen }) {
   const [photoLoaded, setPhotoLoaded] = useState(false);
@@ -13,16 +14,24 @@ export default function Hero({ setScreen }) {
           className={photoLoaded ? '' : 'jb-img-shimmer'}
         >
           <img
-            className={`jb-hero-photo ${photoLoaded ? 'jb-img-loaded' : ''}`}
+            className={`jb-hero-photo jb-hero-photo-desktop ${photoLoaded ? 'jb-img-loaded' : ''}`}
             src={heroElectrician}
             alt=""
             style={{ ...styles.photoImg, opacity: photoLoaded ? undefined : 0 }}
             onLoad={() => setPhotoLoaded(true)}
           />
+          <img
+            className="jb-hero-photo-mobile"
+            src={heroMobile}
+            alt=""
+            style={styles.photoImg}
+          />
         </div>
 
-        {/* Left navy gradient overlay */}
-        <div style={styles.leftFade} />
+        {/* Left navy gradient overlay — desktop only */}
+        <div className="jb-hero-leftfade" style={styles.leftFade} />
+        {/* Mobile gradient overlay — darkens bottom so text stays readable */}
+        <div className="jb-hero-mobile-gradient" />
 
         {/* jb-grid-hero: CSS handles grid-template-columns + gap + align-items */}
         <div className="jb-grid-hero jb-section-px" style={styles.inner}>
