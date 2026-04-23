@@ -6,7 +6,7 @@ export default function About({ setScreen }) {
       {/* Hero */}
       <div style={styles.hero}>
         <div style={styles.heroDeco} />
-        <div style={styles.heroInner}>
+        <div className="jb-section-px" style={styles.heroInner}>
           <div style={styles.eyebrow}>
             <span style={styles.eyebrowLine} />
             About JB Electric
@@ -18,10 +18,7 @@ export default function About({ setScreen }) {
           <p style={styles.sub}>
             JB Electric is a Massachusetts-based electrical contractor specializing in residential and commercial work. We're fully insured, licensed, and committed to quality craftsmanship on every job — big or small.
           </p>
-          <button
-            style={styles.cta}
-            onClick={() => setScreen('contact')}
-          >
+          <button style={styles.cta} onClick={() => setScreen('contact')}>
             Get a Free Quote
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <line x1="5" y1="12" x2="19" y2="12" />
@@ -31,42 +28,31 @@ export default function About({ setScreen }) {
         </div>
       </div>
 
-      {/* Stats bar */}
+      {/* Stats bar — jb-grid-4col handles responsive columns */}
       <div style={styles.statsBar}>
-        <div style={styles.statsInner}>
+        <div className="jb-grid-4col jb-section-px" style={styles.statsInner}>
           {[
             { n: 'Fully', l: 'Insured' },
             { n: 'MA', l: 'Licensed' },
             { n: '$0', l: 'Estimate Cost' },
-            { n: 'Residential &', l: 'Commercial' },
+            { n: 'Res +', l: 'Commercial' },
           ].map((s, i) => (
             <div key={i} style={{ ...styles.statItem, ...(i < 3 ? styles.statBorder : {}) }}>
-              <div style={{ ...styles.statNum, ...(s.n === 'Residential &' ? { fontSize: 22 } : {}) }}>{s.n}</div>
-              <div style={{
-                ...styles.statLabel,
-                ...(s.l === 'Commercial' ? {
-                  fontFamily: "'Archivo',sans-serif",
-                  fontSize: 22,
-                  fontWeight: 900,
-                  letterSpacing: '-0.02em',
-                  color: '#FFD00E',
-                  textTransform: 'none',
-                  lineHeight: 1.1,
-                } : {}),
-              }}>{s.l}</div>
+              <div style={styles.statNum}>{s.n}</div>
+              <div style={styles.statLabel}>{s.l}</div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Services grid */}
-      <div style={styles.services}>
+      {/* Services grid — jb-grid-2col handles responsive columns */}
+      <div className="jb-section-px" style={styles.services}>
         <div style={styles.eyebrowLight}>
           <span style={styles.eyebrowLine} />
           What We Offer
         </div>
         <h2 style={styles.servicesTitle}>Our Core Services</h2>
-        <div style={styles.grid}>
+        <div className="jb-grid-2col" style={styles.grid}>
           {SERVICES.map(s => (
             <div key={s.id} style={styles.card}>
               <div style={styles.cardIcon}>{s.icon}</div>
@@ -96,7 +82,8 @@ const styles = {
   heroInner: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '88px 40px 72px',
+    paddingTop: 88,
+    paddingBottom: 72,
     position: 'relative',
     zIndex: 2,
   },
@@ -161,12 +148,10 @@ const styles = {
     background: '#1B3D8F',
     borderBottom: '3px solid #FFD00E',
   },
+  /* grid-template-columns handled by .jb-grid-4col */
   statsInner: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '0 40px',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4,1fr)',
   },
   statItem: {
     padding: '28px 16px',
@@ -196,7 +181,8 @@ const styles = {
   services: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '72px 40px',
+    paddingTop: 72,
+    paddingBottom: 72,
   },
   eyebrowLight: {
     fontFamily: "'Manrope',sans-serif",
@@ -218,11 +204,8 @@ const styles = {
     letterSpacing: '-0.03em',
     marginBottom: 40,
   },
-  grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(2,1fr)',
-    gap: 16,
-  },
+  /* grid-template-columns + gap handled by .jb-grid-2col */
+  grid: {},
   card: {
     background: '#fff',
     borderRadius: 10,

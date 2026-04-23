@@ -24,7 +24,7 @@ export default function Contact() {
     <div style={styles.root}>
       {/* Top strip */}
       <div style={styles.topStrip}>
-        <div style={styles.topInner}>
+        <div className="jb-section-px" style={styles.topInner}>
           <div>
             <img src={logoContact} alt="JB Electric" style={styles.topLogo} />
             <div style={styles.eyebrow}><span style={styles.eyebrowLine} />Get in Touch</div>
@@ -42,7 +42,8 @@ export default function Contact() {
 
       {/* Body */}
       <div style={styles.body}>
-        <div style={styles.inner}>
+        {/* jb-grid-contact handles responsive columns */}
+        <div className="jb-grid-contact jb-section-px" style={styles.inner}>
           {/* Form */}
           <div style={styles.formCol}>
             <p style={styles.sub}>Tell us about your project and we'll get back to you within one business day. All estimates are free.</p>
@@ -59,7 +60,8 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={styles.form}>
-                <div style={styles.row}>
+                {/* jb-form-row handles responsive columns */}
+                <div className="jb-form-row" style={styles.row}>
                   <div style={styles.field}>
                     <label style={styles.label}>Full Name</label>
                     <input className="jb-input" name="name" value={form.name} onChange={handleChange}
@@ -171,10 +173,13 @@ const styles = {
   topInner: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '56px 40px 48px',
+    paddingTop: 56,
+    paddingBottom: 48,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
+    flexWrap: 'wrap',
+    gap: 24,
   },
   eyebrow: {
     fontFamily: "'Manrope', sans-serif",
@@ -228,14 +233,10 @@ const styles = {
     letterSpacing: '0.06em',
   },
   body: { padding: '56px 0 80px' },
+  /* grid-template-columns + gap + align-items handled by .jb-grid-contact */
   inner: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '0 40px',
-    display: 'grid',
-    gridTemplateColumns: '1.3fr 1fr',
-    gap: 48,
-    alignItems: 'start',
   },
   formCol: {},
   sub: {
@@ -246,7 +247,8 @@ const styles = {
     marginBottom: 32,
   },
   form: { display: 'flex', flexDirection: 'column', gap: 20 },
-  row: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 },
+  /* grid-template-columns handled by .jb-form-row */
+  row: {},
   field: { display: 'flex', flexDirection: 'column', gap: 7 },
   label: {
     fontFamily: "'Manrope', sans-serif",

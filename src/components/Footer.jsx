@@ -4,7 +4,8 @@ export default function Footer({ setScreen }) {
   return (
     <footer style={styles.footer}>
       <div style={styles.top}>
-        <div style={styles.inner}>
+        {/* jb-grid-footer handles responsive columns */}
+        <div className="jb-grid-footer jb-section-px" style={styles.inner}>
           <div style={styles.brand}>
             <img src={logoFooter} alt="JB Electric" style={styles.logo} />
             <p style={styles.tagline}>"Wired for Excellence!"</p>
@@ -57,7 +58,7 @@ export default function Footer({ setScreen }) {
         </div>
       </div>
       <div style={styles.bottom}>
-        <div style={styles.bottomInner}>
+        <div className="jb-section-px" style={styles.bottomInner}>
           <span style={styles.copy}>© 2025 JB Electric. All rights reserved.</span>
           <span style={styles.copy}>Residential · Commercial · Massachusetts</span>
         </div>
@@ -69,13 +70,12 @@ export default function Footer({ setScreen }) {
 const styles = {
   footer: { background: '#07193A' },
   top: { borderBottom: '1px solid rgba(255,255,255,0.07)' },
+  /* grid-template-columns + gap handled by .jb-grid-footer */
   inner: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '72px 40px',
-    display: 'grid',
-    gridTemplateColumns: '1.6fr 1fr 0.8fr 1fr',
-    gap: 56,
+    paddingTop: 72,
+    paddingBottom: 72,
   },
   brand: {},
   logo: { height: 44, width: 'auto', marginBottom: 18 },
@@ -154,9 +154,12 @@ const styles = {
   bottomInner: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '20px 40px',
+    paddingTop: 20,
+    paddingBottom: 20,
     display: 'flex',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: 8,
   },
   copy: {
     fontFamily: "'Manrope', sans-serif",

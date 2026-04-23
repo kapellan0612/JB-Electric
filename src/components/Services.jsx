@@ -57,8 +57,8 @@ export default function Services({ setScreen }) {
 
   return (
     <div style={styles.root}>
-      {/* Section header */}
-      <div style={styles.header}>
+      {/* Section header — jb-grid-svc-hdr handles responsive columns */}
+      <div className="jb-grid-svc-hdr jb-section-px" style={styles.header}>
         <div style={styles.headerLeft}>
           <div style={styles.eyebrow}>
             <span style={styles.eyebrowLine} />
@@ -80,8 +80,8 @@ export default function Services({ setScreen }) {
         </div>
       </div>
 
-      {/* Service cards */}
-      <div style={styles.grid}>
+      {/* Service cards — jb-grid-svc-crd handles responsive columns */}
+      <div className="jb-grid-svc-crd jb-section-px" style={styles.grid}>
         {SERVICES.map((svc, idx) => {
           const isActive = active === svc.id;
           return (
@@ -121,7 +121,8 @@ export default function Services({ setScreen }) {
 
       {/* Bold CTA strip */}
       <div style={styles.ctaStrip}>
-        <div style={styles.ctaInner}>
+        {/* jb-cta-strip-inner handles responsive flex direction */}
+        <div className="jb-cta-strip-inner jb-section-px" style={styles.ctaInner}>
           <div style={styles.ctaBolt}>
             <img src={boltIcon} alt="" style={{ width: 56, height: 'auto', display: 'block' }} />
           </div>
@@ -129,7 +130,7 @@ export default function Services({ setScreen }) {
             <div style={styles.ctaTitle}>Ready to get started?</div>
             <div style={styles.ctaSub}>All estimates are completely free. Call or request online.</div>
           </div>
-          <div style={styles.ctaActions}>
+          <div className="jb-cta-actions" style={styles.ctaActions}>
             <button
               className="jb-btn-primary"
               style={styles.ctaBtnPrimary}
@@ -149,14 +150,12 @@ export default function Services({ setScreen }) {
 
 const styles = {
   root: { background: '#fff' },
+  /* grid-template-columns + gap + align-items handled by .jb-grid-svc-hdr */
   header: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '80px 40px 56px',
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gap: 64,
-    alignItems: 'end',
+    paddingTop: 80,
+    paddingBottom: 56,
     borderBottom: '1px solid rgba(14,42,92,0.08)',
   },
   headerLeft: {},
@@ -207,13 +206,12 @@ const styles = {
     alignSelf: 'flex-start',
     transition: 'all 0.15s',
   },
+  /* grid-template-columns handled by .jb-grid-svc-crd */
   grid: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '48px 40px 0',
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4,1fr)',
-    gap: 0,
+    paddingTop: 48,
+    paddingBottom: 0,
     borderBottom: '1px solid rgba(14,42,92,0.08)',
   },
   card: {
@@ -299,14 +297,13 @@ const styles = {
   },
   ctaStrip: {
     background: '#0E2A5C',
-    padding: '48px 40px',
   },
+  /* display + flex props handled by .jb-cta-strip-inner */
   ctaInner: {
     maxWidth: 1200,
     margin: '0 auto',
-    display: 'flex',
-    alignItems: 'center',
-    gap: 32,
+    paddingTop: 48,
+    paddingBottom: 48,
   },
   ctaBolt: { flexShrink: 0 },
   ctaTitle: {

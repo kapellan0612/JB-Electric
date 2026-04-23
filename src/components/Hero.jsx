@@ -24,18 +24,20 @@ export default function Hero({ setScreen }) {
         {/* Left navy gradient overlay */}
         <div style={styles.leftFade} />
 
-        <div style={styles.inner}>
+        {/* jb-grid-hero: CSS handles grid-template-columns + gap + align-items */}
+        <div className="jb-grid-hero jb-section-px" style={styles.inner}>
           {/* Left: Content */}
           <div style={styles.content}>
             <div className="jb-hero-pop d1" style={styles.eyebrow}>
               LICENSED &amp; INSURED · MA + NH
             </div>
 
-            <h1 style={styles.headline}>
+            {/* jb-hero-headline: CSS handles font-size across breakpoints */}
+            <h1 className="jb-hero-headline" style={styles.headline}>
               <span className="jb-hero-line d2" style={styles.lineWhite}>No Surprises.</span><br />
               <span className="jb-hero-line d3" style={styles.lineWhite}>No Guesswork.</span><br />
-              <span className="jb-hero-line d4" style={{ ...styles.lineYellow, whiteSpace: 'nowrap' }}>Just Electrical</span><br />
-              <span className="jb-hero-line d5" style={{ ...styles.lineYellow, position: 'relative', display: 'inline-block', whiteSpace: 'nowrap' }}>
+              <span className="jb-hero-line d4" style={styles.lineYellow}>Just Electrical</span><br />
+              <span className="jb-hero-line d5" style={{ ...styles.lineYellow, position: 'relative', display: 'inline-block' }}>
                 Work Done Right.
                 <span
                   className="jb-underline-draw zu1"
@@ -70,38 +72,22 @@ export default function Hero({ setScreen }) {
             </div>
 
             <div style={styles.trust}>
-              <div className="jb-hero-trust dt1" style={styles.trustItem}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFD00E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                </svg>
-                Fully Insured
-              </div>
-              <div className="jb-hero-trust dt2" style={styles.trustItem}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFD00E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                  <circle cx="12" cy="10" r="3" />
-                </svg>
-                MA + NH Licensed
-              </div>
-              <div className="jb-hero-trust dt3" style={styles.trustItem}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFD00E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2" />
-                  <path d="M7 11V7a5 5 0 0110 0v4" />
-                </svg>
-                Fixed Price Upfront
-              </div>
-              <div className="jb-hero-trust dt4" style={styles.trustItem}>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFD00E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10" />
-                  <polyline points="8 12 11 15 16 9" />
-                </svg>
-                Permitted Work
-              </div>
+              {[
+                { icon: 'shield', label: 'Fully Insured' },
+                { icon: 'map-pin', label: 'MA + NH Licensed' },
+                { icon: 'lock', label: 'Fixed Price Upfront' },
+                { icon: 'check-circle', label: 'Permitted Work' },
+              ].map(({ icon, label }, i) => (
+                <div key={label} className={`jb-hero-trust dt${i + 1}`} style={styles.trustItem}>
+                  <TrustIcon name={icon} />
+                  {label}
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Right: Service checklist card */}
-          <div style={styles.cardWrap}>
+          {/* Right: Service checklist card — hidden on mobile via CSS */}
+          <div className="jb-hero-card-hide" style={styles.cardWrap}>
             <div className="jb-hero-card-in d9" style={styles.card}>
               <div style={styles.cardHeader}>
                 <div style={styles.cardTitle}>Our Services</div>
@@ -137,6 +123,14 @@ export default function Hero({ setScreen }) {
   );
 }
 
+function TrustIcon({ name }) {
+  const props = { width: 16, height: 16, viewBox: '0 0 24 24', fill: 'none', stroke: '#FFD00E', strokeWidth: 2.5, strokeLinecap: 'round' };
+  if (name === 'shield') return <svg {...props}><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>;
+  if (name === 'map-pin') return <svg {...props}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>;
+  if (name === 'lock') return <svg {...props}><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>;
+  return <svg {...props}><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>;
+}
+
 const styles = {
   root: {},
   hero: {
@@ -158,14 +152,12 @@ const styles = {
     background: 'linear-gradient(90deg, #0E2A5C 0%, rgba(14,42,92,0.78) 20%, rgba(14,42,92,0.35) 38%, rgba(14,42,92,0) 55%)',
     pointerEvents: 'none',
   },
+  /* grid-template-columns, gap, alignItems handled by .jb-grid-hero */
   inner: {
     maxWidth: 1200,
     margin: '0 auto',
-    padding: '72px 40px 88px',
-    display: 'grid',
-    gridTemplateColumns: '1.05fr 0.95fr',
-    gap: 48,
-    alignItems: 'center',
+    paddingTop: 72,
+    paddingBottom: 88,
     position: 'relative',
     zIndex: 2,
   },
@@ -186,10 +178,10 @@ const styles = {
     boxShadow: '0 4px 18px rgba(255,208,14,0.35)',
     textTransform: 'uppercase',
   },
+  /* font-size handled by .jb-hero-headline */
   headline: {
     fontFamily: "'Archivo', sans-serif",
     fontWeight: 900,
-    fontSize: 66,
     lineHeight: 1.02,
     letterSpacing: '-0.025em',
     marginBottom: 24,

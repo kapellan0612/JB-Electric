@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,900;1,700&family=Manrope:wght@400;500;600;700&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: 'Manrope', sans-serif; background: #F4F6FB; }
+html, body { height: 100%; font-family: 'Manrope', sans-serif; background: #F4F6FB; overflow-x: hidden; max-width: 100%; }
 #root { min-height: 100%; display: flex; flex-direction: column; }
 input, select, textarea, button { font-family: inherit; }
 ::-webkit-scrollbar { width: 6px; }
@@ -365,3 +365,124 @@ input, select, textarea, button { font-family: inherit; }
   100% { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 .jb-page { animation: jb-page-in 600ms cubic-bezier(.2,.8,.2,1) both; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   RESPONSIVE LAYOUT SYSTEM
+   All grid layouts live here so media queries can override them.
+   Inline styles on components only carry non-layout properties (color,
+   font-family, border-radius, etc.) — never gridTemplateColumns or display.
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* Hero 2-col grid */
+.jb-grid-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+}
+
+/* Services header 2-col */
+.jb-grid-svc-hdr {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: end;
+}
+
+/* Services 4-col card grid */
+.jb-grid-svc-crd {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Generic 2-col grid */
+.jb-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+/* Generic 4-col grid */
+.jb-grid-4col {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Contact 2-col (asymmetric) */
+.jb-grid-contact {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+/* Footer 4-col */
+.jb-grid-footer {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 0.8fr 1fr;
+  gap: 56px;
+}
+
+/* Form name/phone row */
+.jb-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* CTA strip inner row */
+.jb-cta-strip-inner {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Hero headline — font-size lives here so breakpoints can override */
+.jb-hero-headline {
+  font-size: 66px;
+}
+
+/* Nav — desktop visible / hamburger hidden by default */
+.jb-nav-desktop       { display: flex; gap: 32px; flex: 1; }
+.jb-header-acts       { display: flex; align-items: center; gap: 24px; }
+.jb-hamburger         { display: none; background: none; border: none; cursor: pointer; padding: 8px; color: #fff; flex-shrink: 0; }
+.jb-mobile-menu       { display: none; }
+
+/* Horizontal padding class — overridden on mobile via !important */
+.jb-section-px        { padding-left: 40px; padding-right: 40px; }
+
+/* ── 900 px — tablet / large phone ─────────────────────────────────── */
+@media (max-width: 900px) {
+  .jb-hero-headline     { font-size: 44px; }
+
+  .jb-grid-hero         { grid-template-columns: 1fr; }
+  .jb-grid-svc-hdr      { grid-template-columns: 1fr; gap: 24px; }
+  .jb-grid-svc-crd      { grid-template-columns: 1fr 1fr; }
+  .jb-grid-2col         { grid-template-columns: 1fr; }
+  .jb-grid-4col         { grid-template-columns: 1fr 1fr; }
+  .jb-grid-contact      { grid-template-columns: 1fr; gap: 32px; }
+  .jb-grid-footer       { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .jb-nav-desktop       { display: none; }
+  .jb-header-acts       { display: none; }
+  .jb-hamburger         { display: flex; align-items: center; justify-content: center; margin-left: auto; }
+  .jb-mobile-menu       { display: flex; flex-direction: column; padding: 12px 20px 20px; background: rgba(14,42,92,0.98); border-top: 1px solid rgba(255,208,14,0.15); gap: 2px; }
+
+  .jb-hero-card-hide    { display: none; }
+  .jb-cta-strip-inner   { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .jb-cta-actions       { margin-left: 0 !important; }
+
+  .jb-section-px        { padding-left: 20px !important; padding-right: 20px !important; }
+}
+
+/* ── 600 px — phone ─────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .jb-hero-headline     { font-size: 36px; }
+
+  .jb-grid-svc-crd      { grid-template-columns: 1fr; }
+  .jb-grid-4col         { grid-template-columns: 1fr; }
+  .jb-grid-footer       { grid-template-columns: 1fr; }
+  .jb-form-row          { grid-template-columns: 1fr; }
+
+  .jb-section-px        { padding-left: 16px !important; padding-right: 16px !important; }
+}
