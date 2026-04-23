@@ -65,13 +65,13 @@ export default function Contact() {
                   <div style={styles.field}>
                     <label style={styles.label}>Full Name</label>
                     <input className="jb-input" name="name" value={form.name} onChange={handleChange}
-                      style={inputStyle('name')} placeholder="Jane Smith"
+                      style={inputStyle('name')}
                       onFocus={() => setFocused('name')} onBlur={() => setFocused(null)} required />
                   </div>
                   <div style={styles.field}>
                     <label style={styles.label}>Phone</label>
                     <input className="jb-input" name="phone" value={form.phone} onChange={handleChange}
-                      style={inputStyle('phone')} placeholder="978.000.0000"
+                      style={inputStyle('phone')}
                       onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)} />
                   </div>
                 </div>
