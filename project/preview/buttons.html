@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 24px; }
+  .group { margin-bottom: 22px; }
+  .group:last-child { margin-bottom: 0; }
+  .group-label { font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700; color: #6B7A99; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 12px; }
+  .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .row.dark { background: #0E2A5C; padding: 16px 18px; border-radius: 10px; }
+
+  /* Base button — Archivo 800, tight tracking */
+  .btn { display: inline-flex; align-items: center; gap: 10px; font-family: 'Archivo', sans-serif; font-weight: 800; cursor: pointer; border: none; text-decoration: none; transition: all 0.15s ease; letter-spacing: 0.01em; }
+
+  /* Primary — yellow, navy text, colored shadow (hero + forms) */
+  .btn-primary { background: #FFD00E; color: #0E2A5C; padding: 16px 24px; font-size: 15px; border-radius: 10px; box-shadow: 0 6px 18px rgba(255,208,14,0.35); }
+  .btn-primary:hover { background: #F7A823; transform: translateY(-1px); }
+  .btn-primary .arrow { transition: transform 0.2s; }
+  .btn-primary:hover .arrow { transform: translateX(3px); }
+
+  /* Primary Compact — header CTAs, card buttons */
+  .btn-primary-sm { background: #FFD00E; color: #0E2A5C; padding: 10px 22px; font-size: 13px; border-radius: 6px; font-weight: 700; letter-spacing: 0.02em; }
+
+  /* Navy-on-Yellow inverse — card secondary CTA ("Schedule Service") */
+  .btn-navy { background: #0E2A5C; color: #FFD00E; padding: 14px 16px; font-size: 14px; border-radius: 8px; letter-spacing: 0.02em; }
+  .btn-navy:hover { background: #07193A; }
+
+  /* Secondary link — underlined yellow bar, on-dark */
+  .btn-link { background: transparent; color: #FFFFFF; padding: 15px 4px; font-size: 15px; font-weight: 700; border-bottom: 2px solid #FFD00E; border-radius: 0; }
+  .btn-link:hover { color: #FFD00E; }
+
+  /* Ghost — bordered translucent (on-dark, contact page) */
+  .btn-ghost { background: transparent; color: rgba(255,255,255,0.75); border: 1.5px solid rgba(255,255,255,0.20); padding: 12px 24px; font-size: 15px; border-radius: 8px; font-weight: 700; }
+  .btn-ghost:hover { border-color: #FFD00E; color: #FFD00E; }
+
+  /* Disabled */
+  .btn:disabled, .btn.disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+</style>
+</head><body>
+
+  <div class="group">
+    <div class="group-label">Primary · Yellow Bolt CTA</div>
+    <div class="row">
+      <button class="btn btn-primary">
+        Get My Free Estimate
+        <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <button class="btn btn-primary">Request Free Quote</button>
+      <button class="btn btn-primary disabled" disabled>Sending…</button>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Primary Compact · Header & Forms (6px radius)</div>
+    <div class="row dark">
+      <button class="btn btn-primary-sm">Free Quote</button>
+      <button class="btn btn-primary-sm">Get a Quote →</button>
+      <button class="btn btn-primary-sm">Request a Free Quote →</button>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Navy-on-Yellow · Inverse CTA (inside cards)</div>
+    <div class="row">
+      <button class="btn btn-navy">Schedule Service →</button>
+      <button class="btn btn-navy">Contact Us →</button>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">On-Dark Link · Underlined with Yellow Bar</div>
+    <div class="row dark">
+      <button class="btn btn-link">Or see our services →</button>
+      <button class="btn btn-link">Learn more →</button>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Ghost · Outlined on Dark</div>
+    <div class="row dark">
+      <a href="#" class="btn btn-ghost">978.397.9878</a>
+      <a href="#" class="btn btn-ghost">View Services</a>
+    </div>
+  </div>
+
+</body></html>

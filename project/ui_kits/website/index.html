@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JB Electric — Website UI Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,900;1,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: 'Manrope', sans-serif; background: #F4F6FB; }
+    #root { min-height: 100%; display: flex; flex-direction: column; }
+    input, select, textarea, button { font-family: inherit; }
+    ::-webkit-scrollbar { width: 6px; } ::-webkit-scrollbar-track { background: #0E2A5C; } ::-webkit-scrollbar-thumb { background: #FFD00E; border-radius: 3px; }
+
+    /* ─── Micro-interactions ─── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* Primary yellow button — lift + glow */
+    .jb-btn-primary { transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1), background 180ms ease, color 180ms ease; will-change: transform; }
+    .jb-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(255,208,14,0.42), 0 2px 6px rgba(14,42,92,0.12); }
+    .jb-btn-primary:active { transform: translateY(0); box-shadow: 0 2px 8px rgba(255,208,14,0.30); transition-duration: 80ms; }
+
+    /* Lift-only variant — no glow (used on hero buttons) */
+    .jb-btn-lift { transition: transform 220ms cubic-bezier(.2,.8,.2,1), background 180ms ease, color 180ms ease; will-change: transform; box-shadow: none !important; }
+    .jb-btn-lift:hover { transform: translateY(-2px); }
+    .jb-btn-lift:active { transform: translateY(0); transition-duration: 80ms; }
+
+    /* Inverse hover — swap to navy with yellow text */
+    .jb-btn-inverse:hover { background: #0E2A5C !important; color: #FFD00E !important; }
+
+    /* White inverse — used on navy headers where navy swap would disappear */
+    .jb-btn-inverse-white:hover { background: #fff !important; color: #0E2A5C !important; }
+
+    /* Ghost / secondary button */
+    .jb-btn-ghost { transition: border-color 200ms ease, color 200ms ease, background 200ms ease; }
+    .jb-btn-ghost:hover { border-color: #FFD00E !important; color: #fff !important; background: rgba(255,208,14,0.06); }
+
+    /* Nav link — yellow underline sweep */
+    .jb-nav-link { position: relative; transition: color 180ms ease; }
+    .jb-nav-link::after { content: ''; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px; background: #FFD00E; border-radius: 2px; transform: scaleX(0); transform-origin: left center; transition: transform 260ms cubic-bezier(.2,.8,.2,1); }
+    .jb-nav-link:hover::after { transform: scaleX(1); }
+    .jb-nav-link.is-active::after { transform: scaleX(1); }
+
+    /* Phone link — icon wiggle */
+    .jb-phone { transition: color 180ms ease; }
+    .jb-phone:hover { color: #fff !important; }
+    .jb-phone:hover svg { animation: jb-wiggle 520ms ease-in-out; }
+    @keyframes jb-wiggle {
+      0%, 100% { transform: rotate(0); }
+      20% { transform: rotate(-12deg); }
+      40% { transform: rotate(10deg); }
+      60% { transform: rotate(-6deg); }
+      80% { transform: rotate(4deg); }
+    }
+
+    /* Service card — lift + inner shadow */
+    .jb-service-card { transition: transform 260ms cubic-bezier(.2,.8,.2,1), background 200ms ease, box-shadow 260ms ease; will-change: transform; }
+    .jb-service-card:hover { transform: translateY(-4px); }
+    .jb-service-card .jb-icon-wrap { transition: transform 260ms cubic-bezier(.2,.8,.2,1), background 200ms ease, color 200ms ease; }
+    .jb-service-card:hover .jb-icon-wrap { transform: scale(1.08) rotate(-3deg); }
+    .jb-service-card .jb-learn-more { transition: transform 220ms cubic-bezier(.2,.8,.2,1), color 180ms ease; display: inline-block; }
+    .jb-service-card:hover .jb-learn-more { transform: translateX(4px); color: #0E2A5C; }
+
+    /* Logo — subtle hover lift */
+    .jb-logo { transition: transform 260ms cubic-bezier(.2,.8,.2,1), filter 200ms ease; }
+    .jb-logo:hover { transform: scale(1.03); filter: brightness(1.1); }
+
+    /* Form inputs — focus ring */
+    .jb-input { transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease; }
+    .jb-input:focus { outline: none; border-color: #FFD00E !important; box-shadow: 0 0 0 4px rgba(255,208,14,0.18); }
+
+    /* Arrow button — slide on hover */
+    .jb-btn-arrow svg { transition: transform 220ms cubic-bezier(.2,.8,.2,1); }
+    .jb-btn-arrow:hover svg { transform: translateX(4px); }
+
+    /* ─── Entrance animations ─── */
+    @keyframes jb-blur-rise {
+      0%   { opacity: 0; transform: translateY(28px); filter: blur(8px); }
+      60%  { opacity: 1; filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    @keyframes jb-fade-up {
+      0%   { opacity: 0; transform: translateY(14px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes jb-pop {
+      0%   { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes jb-card-in {
+      0%   { opacity: 0; transform: translateX(48px) translateY(14px); }
+      100% { opacity: 1; transform: translateX(0) translateY(0); }
+    }
+    @keyframes jb-check-in {
+      0%   { opacity: 0; transform: translateX(-10px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes jb-photo-in {
+      0%   { opacity: 0; transform: scale(1.12); }
+      100% { opacity: 1; transform: scale(1.04); }
+    }
+    @keyframes jb-kenburns {
+      0%   { transform: scale(1.04) translate(0, 0); }
+      100% { transform: scale(1.10) translate(-1.5%, -0.8%); }
+    }
+    @keyframes jb-trust-in {
+      0%   { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 0.92; transform: translateY(0); }
+    }
+
+    /* Apply */
+    .jb-hero-photo { opacity: 0; animation: jb-photo-in 2200ms cubic-bezier(.2,.8,.2,1) forwards, jb-kenburns 28s ease-in-out 2200ms infinite alternate; }
+    .jb-hero-pop { opacity: 0; animation: jb-pop 900ms cubic-bezier(.2,1.4,.3,1) forwards; }
+    .jb-hero-line { display: inline-block; opacity: 0; animation: jb-blur-rise 1500ms cubic-bezier(.16,.8,.2,1) forwards; }
+    .jb-hero-fade { opacity: 0; animation: jb-fade-up 1200ms cubic-bezier(.2,.8,.2,1) forwards; }
+    .jb-hero-card-in { opacity: 0; animation: jb-card-in 1500ms cubic-bezier(.16,.8,.2,1) forwards; }
+    .jb-hero-check { opacity: 0; animation: jb-check-in 1100ms cubic-bezier(.2,.8,.2,1) forwards; }
+    .jb-hero-trust { opacity: 0; animation: jb-trust-in 850ms cubic-bezier(.2,.8,.2,1) forwards; }
+
+    /* Stagger delays */
+    .d1  { animation-delay: 200ms; }
+    .d2  { animation-delay: 450ms; }
+    .d3  { animation-delay: 700ms; }
+    .d4  { animation-delay: 950ms; }
+    .d5  { animation-delay: 1200ms; }
+    .d6  { animation-delay: 1450ms; }
+    .d7  { animation-delay: 1800ms; }
+    .d8  { animation-delay: 2100ms; }
+    .d9  { animation-delay: 1200ms; }
+
+    /* Checklist staggers */
+    .dc1 { animation-delay: 2000ms; }
+    .dc2 { animation-delay: 2250ms; }
+    .dc3 { animation-delay: 2500ms; }
+    .dc4 { animation-delay: 2750ms; }
+    .dc5 { animation-delay: 3000ms; }
+    .dc6 { animation-delay: 3250ms; }
+
+    /* Trust bar staggers */
+    .dt1 { animation-delay: 2200ms; }
+    .dt2 { animation-delay: 2340ms; }
+    .dt3 { animation-delay: 2480ms; }
+    .dt4 { animation-delay: 2620ms; }
+
+    /* Viewport-rise (applied by IntersectionObserver) */
+    .jb-rise         { opacity: 0; transform: translateY(32px); transition: opacity 700ms cubic-bezier(.2,.8,.2,1), transform 700ms cubic-bezier(.2,.8,.2,1); }
+    .jb-rise.jb-in   { opacity: 1; transform: translateY(0); }
+    .jb-rise.s1 { transition-delay: 0ms; }
+    .jb-rise.s2 { transition-delay: 100ms; }
+    .jb-rise.s3 { transition-delay: 200ms; }
+    .jb-rise.s4 { transition-delay: 300ms; }
+
+    /* ─── Signature: Bolt spark + glow (hero eyebrow) ─── */
+    .jb-hero-pop svg {
+      animation: jb-bolt-spark 1400ms cubic-bezier(.2,.9,.3,1) 1200ms both,
+                 jb-bolt-pulse 2400ms ease-in-out 2600ms infinite;
+      transform-origin: center;
+      filter: drop-shadow(0 0 0 rgba(255,208,14,0));
+    }
+    @keyframes jb-bolt-spark {
+      0%   { transform: scale(0.4) rotate(-20deg); filter: drop-shadow(0 0 0 rgba(255,208,14,0)); }
+      40%  { transform: scale(1.5) rotate(8deg);   filter: drop-shadow(0 0 14px rgba(255,208,14,0.95)); }
+      70%  { transform: scale(0.95) rotate(-3deg); filter: drop-shadow(0 0 6px rgba(255,208,14,0.4)); }
+      100% { transform: scale(1) rotate(0);        filter: drop-shadow(0 0 2px rgba(255,208,14,0.0)); }
+    }
+    @keyframes jb-bolt-pulse {
+      0%, 100% { filter: drop-shadow(0 0 0 rgba(255,208,14,0)); }
+      50%      { filter: drop-shadow(0 0 10px rgba(255,208,14,0.7)); }
+    }
+
+    /* ─── Signature: Bolt spark on hero load ─── */
+    .jb-bolt-spark { display: inline-flex; align-items: center; justify-content: center; position: relative; }
+    .jb-bolt-spark svg { animation: jb-bolt-pop 900ms cubic-bezier(.2,1.4,.3,1) both; animation-delay: 350ms; transform-origin: center; }
+    .jb-bolt-spark::before {
+      content: ''; position: absolute; inset: -8px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,208,14,0.9) 0%, rgba(255,208,14,0) 70%);
+      opacity: 0; animation: jb-bolt-flash 1100ms ease-out both; animation-delay: 400ms;
+      pointer-events: none;
+    }
+    .jb-bolt-spark::after {
+      content: ''; position: absolute; inset: -4px; border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(255,208,14,0.6);
+      animation: jb-bolt-pulse 2600ms ease-out 1400ms infinite;
+      pointer-events: none;
+    }
+    @keyframes jb-bolt-pop {
+      0%   { transform: scale(0) rotate(-40deg); opacity: 0; }
+      50%  { transform: scale(1.4) rotate(8deg); opacity: 1; filter: drop-shadow(0 0 8px rgba(255,208,14,0.9)); }
+      100% { transform: scale(1) rotate(0); opacity: 1; filter: drop-shadow(0 0 0 rgba(255,208,14,0)); }
+    }
+    @keyframes jb-bolt-flash {
+      0%   { opacity: 0; transform: scale(0.4); }
+      30%  { opacity: 1; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(2.2); }
+    }
+    @keyframes jb-bolt-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(255,208,14,0.5); }
+      70%  { box-shadow: 0 0 0 10px rgba(255,208,14,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,208,14,0); }
+    }
+
+    /* ─── Signature: Yellow "zap" underline on accent words ─── */
+    .jb-zap { position: relative; display: inline-block; }
+    .jb-zap::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: -2px;
+      height: 6px; border-radius: 3px;
+      background: linear-gradient(90deg, #FFD00E 0%, #FFD00E 60%, #F7A823 100%);
+      transform: scaleX(0); transform-origin: left center;
+      box-shadow: 0 0 12px rgba(255,208,14,0.6);
+      animation: jb-zap-draw 900ms cubic-bezier(.7,0,.3,1) forwards;
+    }
+    .jb-zap.zd4::after { animation-delay: 1600ms; }
+    .jb-zap.zd5::after { animation-delay: 1900ms; }
+    .jb-underline-draw { animation: jb-zap-draw 900ms cubic-bezier(.7,0,.3,1) forwards; }
+    .jb-underline-draw.zu1 { animation-delay: 2000ms; }
+    .jb-underline-draw.zu2 { animation-delay: 2300ms; }
+    @keyframes jb-zap-draw {
+      0%   { transform: scaleX(0); }
+      60%  { transform: scaleX(1.02); }
+      100% { transform: scaleX(1); }
+    }
+
+    /* ─── Submit button → progress bar morph ─── */
+    .jb-submit-btn {
+      position: relative;
+      overflow: hidden;
+      transition: transform 220ms cubic-bezier(.2,.8,.2,1), background 300ms ease, color 300ms ease, letter-spacing 400ms ease;
+    }
+    .jb-submit-btn:not(.is-loading):hover { transform: translateY(-2px); background: #0E2A5C !important; color: #FFD00E !important; }
+    .jb-submit-btn .jb-submit-label { display: inline-flex; align-items: center; gap: 10px; transition: opacity 200ms ease; }
+    .jb-submit-btn .jb-submit-loading {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Archivo', sans-serif; font-weight: 700; letter-spacing: 0.12em;
+      color: #0E2A5C; opacity: 0; pointer-events: none;
+      transition: opacity 220ms ease;
+    }
+    .jb-submit-btn .jb-submit-progress {
+      position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+      background: linear-gradient(90deg, #FFD00E 0%, #FFE875 50%, #FFD00E 100%);
+      background-size: 200% 100%;
+      transition: width 1400ms cubic-bezier(.4,.1,.3,1);
+      z-index: 0;
+    }
+    .jb-submit-btn.is-loading {
+      cursor: wait; pointer-events: none;
+      background: #0E2A5C !important;
+    }
+    .jb-submit-btn.is-loading .jb-submit-label { opacity: 0; }
+    .jb-submit-btn.is-loading .jb-submit-loading {
+      opacity: 1; z-index: 1;
+      animation: jb-loading-shimmer 1400ms ease-in-out infinite;
+    }
+    .jb-submit-btn.is-loading .jb-submit-progress {
+      width: 100%;
+      animation: jb-progress-shine 1400ms linear infinite;
+    }
+    @keyframes jb-loading-shimmer {
+      0%, 100% { color: #0E2A5C; }
+      50% { color: #1B3D8F; }
+    }
+    @keyframes jb-progress-shine {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* ─── Success: Yellow bolt-strike ─── */
+    .jb-success-flash { position: relative; overflow: hidden; }
+    .jb-success-flash::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(circle at 50% 30%, rgba(255,208,14,0.45) 0%, rgba(255,208,14,0) 60%);
+      animation: jb-success-glow 1600ms ease-out forwards;
+    }
+    .jb-success-flash::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(115deg, transparent 40%, rgba(255,208,14,0.9) 50%, transparent 60%);
+      transform: translateX(-100%);
+      animation: jb-bolt-strike 700ms cubic-bezier(.7,0,.3,1) 80ms forwards;
+    }
+    .jb-success-bolt {
+      animation: jb-bolt-zap-in 900ms cubic-bezier(.2,1.4,.3,1) 200ms both !important;
+      background: #FFD00E !important;
+      box-shadow: 0 0 0 0 rgba(255,208,14,0.8) !important;
+    }
+    .jb-success-bolt::before {
+      content: ''; position: absolute; inset: -6px; border-radius: inherit;
+      box-shadow: 0 0 0 0 rgba(255,208,14,0.8);
+      animation: jb-bolt-ring 1800ms ease-out 400ms;
+      pointer-events: none;
+    }
+    @keyframes jb-success-glow {
+      0%   { opacity: 1; }
+      100% { opacity: 0; }
+    }
+    @keyframes jb-bolt-strike {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    @keyframes jb-bolt-zap-in {
+      0%   { transform: scale(0) rotate(-45deg); opacity: 0; filter: drop-shadow(0 0 0 rgba(255,208,14,0)); }
+      40%  { transform: scale(1.4) rotate(10deg); opacity: 1; filter: drop-shadow(0 0 16px rgba(255,208,14,1)); }
+      60%  { transform: scale(0.9) rotate(-5deg); }
+      100% { transform: scale(1) rotate(0); opacity: 1; filter: drop-shadow(0 0 0 rgba(255,208,14,0)); }
+    }
+    @keyframes jb-bolt-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(255,208,14,0.8); }
+      70%  { box-shadow: 0 0 0 24px rgba(255,208,14,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,208,14,0); }
+    }
+
+    /* ─── Image shimmer (diagonal sweep) ─── */
+    .jb-img-shimmer {
+      position: relative;
+      background: linear-gradient(110deg, #EEF2FA 30%, #F8FAFF 50%, #EEF2FA 70%);
+      background-size: 200% 100%;
+      animation: jb-shimmer-sweep 1600ms ease-in-out infinite;
+      overflow: hidden;
+    }
+    .jb-img-loaded { animation: jb-img-fade-in 500ms ease-out forwards; }
+    @keyframes jb-shimmer-sweep {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    @keyframes jb-img-fade-in {
+      0%   { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    /* ─── Signature: Page transitions ─── */    @keyframes jb-page-in {
+      0%   { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+      60%  { filter: blur(0); }
+      100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+    }
+    .jb-page { animation: jb-page-in 600ms cubic-bezier(.2,.8,.2,1) both; }
+
+    /* Page wipe overlay — REMOVED */
+  </style>
+</head>
+<body>
+<template id="__bundler_thumbnail">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+    <rect width="400" height="400" fill="#0E2A5C"/>
+    <g transform="translate(200 200)">
+      <circle r="110" fill="#FFD00E"/>
+      <path d="M 20 -80 L -40 30 L 10 30 L -10 80 L 50 -20 L 0 -20 L 20 -80 Z" fill="#0E2A5C" stroke="#0E2A5C" stroke-width="4" stroke-linejoin="round"/>
+    </g>
+    <text x="200" y="350" font-family="Archivo, sans-serif" font-weight="900" font-size="32" fill="#FFD00E" text-anchor="middle" letter-spacing="2">JB ELECTRIC</text>
+  </svg>
+</template>
+<div id="root"></div>
+
+<script src="_assets.js"></script>
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="Services.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+<script type="text/babel" src="Contact.jsx"></script>
+
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+/* ── About screen ── */
+const About = ({ setScreen }) => (
+  <div>
+    {/* Hero */}
+    <div style={{ background: '#0E2A5C', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ position: 'absolute', right: 0, top: 0, bottom: 0, width: '45%', background: 'linear-gradient(135deg, rgba(27,61,143,0.5), transparent)', transform: 'skewX(-8deg) translateX(10%)' }}/>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '88px 40px 72px', position: 'relative', zIndex: 2 }}>
+        <div style={{ fontFamily: "'Manrope',sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', marginBottom: 18, display: 'flex', alignItems: 'center', gap: 10 }}>
+          <span style={{ display: 'inline-block', width: 24, height: 2, background: '#FFD00E', borderRadius: 1 }}/>
+          About JB Electric
+        </div>
+        <h1 style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 900, fontSize: 72, color: '#fff', letterSpacing: '-0.03em', lineHeight: 0.92, marginBottom: 28 }}>
+          Wired for<br/><span style={{ background: 'linear-gradient(90deg,#FFD00E,#F7A823)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>Excellence!</span>
+        </h1>
+        <p style={{ fontFamily: "'Manrope',sans-serif", fontSize: 18, color: 'rgba(255,255,255,0.62)', lineHeight: 1.7, maxWidth: 560, marginBottom: 36 }}>
+          JB Electric is a Massachusetts-based electrical contractor specializing in residential and commercial work. We're fully insured, licensed, and committed to quality craftsmanship on every job — big or small.
+        </p>
+        <button onClick={() => setScreen('contact')}
+          style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 700, fontSize: 15, background: '#FFD00E', color: '#0E2A5C', border: 'none', borderRadius: 8, padding: '14px 28px', cursor: 'pointer', boxShadow: '0 4px 16px rgba(255,208,14,0.25)', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+          Get a Free Quote
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+    </div>
+
+    {/* Stats */}
+    <div style={{ background: '#1B3D8F', borderBottom: '3px solid #FFD00E' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 40px', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)' }}>
+        {[{ n: 'Fully', l: 'Insured' }, { n: 'MA', l: 'Licensed' }, { n: '$0', l: 'Estimate Cost' }, { n: 'Residential &', l: 'Commercial' }].map((s, i) => (
+          <div key={i} style={{ padding: '28px 16px', borderRight: i < 3 ? '1px solid rgba(255,255,255,0.10)' : 'none', textAlign: 'center' }}>
+            <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 900, fontSize: s.n === 'Residential &' ? 22 : 36, color: '#FFD00E', letterSpacing: '-0.02em', marginBottom: 4, lineHeight: 1.1 }}>{s.n}</div>
+            <div style={{ fontFamily: s.l === 'Commercial' ? "'Archivo',sans-serif" : "'Manrope',sans-serif", fontSize: s.l === 'Commercial' ? 22 : 12, fontWeight: s.l === 'Commercial' ? 900 : 600, color: s.l === 'Commercial' ? '#FFD00E' : 'rgba(255,255,255,0.50)', textTransform: 'uppercase', letterSpacing: s.l === 'Commercial' ? '-0.02em' : '0.10em', lineHeight: 1.1 }}>{s.l}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Services */}
+    <div style={{ maxWidth: 1200, margin: '0 auto', padding: '72px 40px' }}>
+      <div style={{ fontFamily: "'Manrope',sans-serif", fontSize: 11, fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#1B3D8F', marginBottom: 16, display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span style={{ display: 'inline-block', width: 24, height: 2, background: '#FFD00E', borderRadius: 1 }}/>
+        What We Offer
+      </div>
+      <h2 style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 900, fontSize: 44, color: '#0E2A5C', letterSpacing: '-0.03em', marginBottom: 40 }}>Our Core Services</h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: 16 }}>
+        {SERVICES.map(s => (
+          <div key={s.id} style={{ background: '#fff', borderRadius: 10, padding: '28px 28px', boxShadow: '0 2px 12px rgba(14,42,92,0.08)', display: 'flex', gap: 20, alignItems: 'flex-start', border: '1px solid rgba(14,42,92,0.06)' }}>
+            <div style={{ width: 52, height: 52, background: '#EEF2FA', borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#1B3D8F', flexShrink: 0 }}>{s.icon}</div>
+            <div>
+              <div style={{ fontFamily: "'Archivo',sans-serif", fontWeight: 700, fontSize: 17, color: '#0E2A5C', marginBottom: 6 }}>{s.title}</div>
+              <div style={{ fontFamily: "'Manrope',sans-serif", fontSize: 14, color: '#6B7A99', lineHeight: 1.65 }}>{s.long}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+/* ── App ── */
+const App = () => {
+  const [screen, setScreen] = useState(() => localStorage.getItem('jb_screen') || 'home');
+
+  useEffect(() => {
+    localStorage.setItem('jb_screen', screen);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [screen]);
+
+  const renderScreen = () => {
+    switch (screen) {
+      case 'home':     return <><Hero setScreen={setScreen} /><Services setScreen={setScreen} /></>;
+      case 'services': return <Services setScreen={setScreen} />;
+      case 'about':    return <About setScreen={setScreen} />;
+      case 'contact':  return <Contact />;
+      default:         return <Hero setScreen={setScreen} />;
+    }
+  };
+
+  const [wipeKey, setWipeKey] = useState(0);
+  useEffect(() => { setWipeKey(k => k + 1); }, [screen]);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      <Header currentScreen={screen} setScreen={setScreen} />
+      <main key={screen} className="jb-page" style={{ flex: 1 }}>{renderScreen()}</main>
+      <Footer setScreen={setScreen} />
+    </div>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+
+// IntersectionObserver — add 'jb-in' class when .jb-rise enters viewport
+const jbObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('jb-in');
+      jbObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+const jbScanRise = () => {
+  document.querySelectorAll('.jb-rise:not(.jb-in)').forEach(el => jbObserver.observe(el));
+};
+// Rescan after each render (screen change) — keep it simple
+setInterval(jbScanRise, 300);
+</script>
+</body>
+</html>

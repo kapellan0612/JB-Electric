@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 20px; }
+  .swatches { display: flex; gap: 12px; }
+  .swatch { flex: 1; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(14,42,92,0.12); }
+  .color-block { height: 90px; }
+  .info { background: #fff; padding: 10px 12px; }
+  .name { font-size: 11px; font-weight: 600; color: #0E2A5C; text-transform: uppercase; letter-spacing: 0.08em; }
+  .hex  { font-size: 13px; color: #6B7A99; margin-top: 2px; }
+  .role { font-size: 10px; color: #9BAABB; margin-top: 1px; }
+  .gradient-block { height: 90px; background: linear-gradient(135deg, #FFD00E 0%, #F7A823 50%, #F26A21 100%); }
+</style>
+</head><body>
+<div class="swatches">
+  <div class="swatch">
+    <div class="color-block" style="background:#FFD00E;"></div>
+    <div class="info"><div class="name">Bolt Yellow</div><div class="hex">#FFD00E</div><div class="role">Accent / CTA</div></div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#F7A823;"></div>
+    <div class="info"><div class="name">Bolt Amber</div><div class="hex">#F7A823</div><div class="role">Midtone</div></div>
+  </div>
+  <div class="swatch">
+    <div class="color-block" style="background:#F26A21;"></div>
+    <div class="info"><div class="name">Bolt Orange</div><div class="hex">#F26A21</div><div class="role">Deep Accent / Alert</div></div>
+  </div>
+  <div class="swatch">
+    <div class="gradient-block"></div>
+    <div class="info"><div class="name">Bolt Gradient</div><div class="hex">Yellow → Amber → Orange</div><div class="role">Logo / Icon only</div></div>
+  </div>
+</div>
+</body></html>

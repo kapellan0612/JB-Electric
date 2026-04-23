@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 18px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; align-items: start; }
+
+  /* Service card — idle + active pair from Services.jsx */
+  .service { background: #fff; border: 1px solid rgba(14,42,92,0.08); border-radius: 8px; padding: 22px 20px; display: flex; flex-direction: column; gap: 10px; min-height: 240px; }
+  .service .top { display:flex; justify-content: space-between; align-items: flex-start; }
+  .service .num { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 28px; color: rgba(14,42,92,0.08); line-height: 1; letter-spacing: -0.02em; }
+  .service .icon { width: 40px; height: 40px; background: #EEF2FA; border-radius: 8px; display:flex; align-items:center; justify-content:center; color: #1B3D8F; }
+  .service h3 { font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 15px; color: #0E2A5C; line-height: 1.2; }
+  .service p { font-size: 12px; color: #6B7A99; line-height: 1.6; flex: 1; }
+  .service .footer { border-top: 1px solid rgba(14,42,92,0.07); padding-top: 10px; font-size: 12px; font-weight: 600; color: #1B3D8F; }
+
+  .service-active { background: #0E2A5C; box-shadow: inset 0 4px 0 0 #FFD00E; border-color: transparent; }
+  .service-active .num { color: rgba(255,208,14,0.25); }
+  .service-active .icon { background: #FFD00E; color: #0E2A5C; }
+  .service-active h3 { color: #fff; }
+  .service-active p { color: rgba(255,255,255,0.65); }
+  .service-active .footer { border-top-color: rgba(255,208,14,0.15); }
+  .service-active .quote-btn { display:inline-flex; align-items:center; gap:6px; font-family:'Archivo',sans-serif; font-weight:700; font-size:12px; background:#FFD00E; color:#0E2A5C; padding:8px 14px; border-radius:6px; border:none; }
+
+  /* Floating hero card — checklist */
+  .hero-card { background: #fff; border-radius: 12px; padding: 22px 22px 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.28), 0 4px 12px rgba(0,0,0,0.12); }
+  .hero-card .head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; border-bottom: 1px solid rgba(14,42,92,0.08); }
+  .hero-card .title { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 17px; color: #0E2A5C; letter-spacing: -0.01em; }
+  .hero-card .sub { font-family: 'Manrope', sans-serif; font-size: 9px; font-weight: 700; color: #2E5AAA; text-transform: uppercase; letter-spacing: 0.12em; }
+  .hero-card ul { list-style: none; padding: 4px 0 0; }
+  .hero-card li { display: flex; align-items: center; gap: 10px; padding: 8px 4px; font-family: 'Archivo', sans-serif; font-weight: 700; font-size: 13px; color: #0E2A5C; border-radius: 5px; }
+  .hero-card .dot { width: 18px; height: 18px; border-radius: 50%; background: #FFD00E; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .hero-card .cta { width: 100%; margin-top: 12px; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 12px; background: #0E2A5C; color: #FFD00E; border: none; border-radius: 8px; padding: 12px 14px; cursor: pointer; letter-spacing: 0.02em; }
+
+  /* Info panel — navy w/ gradient top bar */
+  .info-card { background: #0E2A5C; border-radius: 12px; padding: 22px 20px; box-shadow: 0 16px 48px rgba(14,42,92,0.22); }
+  .info-card .bar { height: 3px; background: linear-gradient(90deg, #FFD00E, #F7A823, #F26A21); border-radius: 2px; margin-bottom: 18px; }
+  .info-card .label { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.30); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 4px; }
+  .info-card .phone { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 24px; color: #FFD00E; letter-spacing: -0.01em; display: block; margin-bottom: 14px; }
+  .info-card .value { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.72); line-height: 1.6; }
+  .info-card .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 14px 0; }
+</style>
+</head><body>
+
+  <div class="service">
+    <div class="top">
+      <div class="num">01</div>
+      <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+    </div>
+    <h3>Electrical Installations</h3>
+    <p>New construction, additions, upgrades. Panels, outlets, fixtures, and code compliance.</p>
+    <div class="footer">Learn more →</div>
+  </div>
+
+  <div class="service service-active">
+    <div class="top">
+      <div class="num">02</div>
+      <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/></svg></div>
+    </div>
+    <h3>Lighting Solutions</h3>
+    <p>We design and install lighting systems for every application — recessed, exterior security, landscape accent, and commercial LED retrofits.</p>
+    <div class="footer"><button class="quote-btn">Get a Quote →</button></div>
+  </div>
+
+  <div class="hero-card">
+    <div class="head">
+      <div class="title">Our Services</div>
+      <div class="sub">Tap to Learn</div>
+    </div>
+    <ul>
+      <li><span class="dot"><svg width="10" height="10" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Electrical Installations</li>
+      <li><span class="dot"><svg width="10" height="10" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Lighting Solutions</li>
+      <li><span class="dot"><svg width="10" height="10" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>EV Charger Installs</li>
+    </ul>
+    <button class="cta">Schedule Service →</button>
+  </div>
+
+  <div class="info-card" style="grid-column: span 2;">
+    <div class="bar"></div>
+    <div class="label">Call Us</div>
+    <a class="phone">978.397.9878</a>
+    <div class="label">Email</div>
+    <div class="value">JHORNETBC@GMAIL.COM</div>
+    <div class="divider"></div>
+    <div class="label">Hours</div>
+    <div class="value">Mon–Fri · 7am–6pm · <span style="color:#F7A823">Emergency callouts available</span></div>
+  </div>
+
+</body></html>

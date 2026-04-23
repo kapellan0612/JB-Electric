@@ -1,0 +1,199 @@
+/* ============================================================
+   JB Electric — Design System Tokens
+   colors_and_type.css
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,900;1,700;1,900&family=Manrope:wght@400;500;600;700&display=swap');
+
+/* ── Base Color Palette ─────────────────────────────────── */
+:root {
+  /* Blues */
+  --color-deep-navy:      #0E2A5C;
+  --color-brand-blue:     #1B3D8F;
+  --color-electric-blue:  #2E5AAA;
+
+  /* Bolt / Gold */
+  --color-bolt-yellow:    #FFD00E;
+  --color-bolt-amber:     #F7A823;
+  --color-bolt-orange:    #F26A21;
+
+  /* Neutrals */
+  --color-white:          #FFFFFF;
+  --color-light-bg:       #F4F6FB;
+  --color-mid-gray:       #D0D8E8;
+  --color-text-muted:     #6B7A99;
+
+  /* ── Semantic Tokens ──────────────────────────────────── */
+
+  /* Backgrounds */
+  --bg-base:              var(--color-white);
+  --bg-subtle:            var(--color-light-bg);
+  --bg-brand:             var(--color-brand-blue);
+  --bg-brand-dark:        var(--color-deep-navy);
+  --bg-accent:            var(--color-bolt-yellow);
+
+  /* Foreground / Text */
+  --fg-primary:           var(--color-deep-navy);
+  --fg-secondary:         var(--color-brand-blue);
+  --fg-muted:             var(--color-text-muted);
+  --fg-inverse:           var(--color-white);
+  --fg-accent:            var(--color-bolt-yellow);
+
+  /* Border */
+  --border-default:       rgba(14, 42, 92, 0.12);
+  --border-strong:        rgba(14, 42, 92, 0.30);
+  --border-accent:        var(--color-bolt-yellow);
+
+  /* Interactive / CTA */
+  --cta-bg:               var(--color-bolt-yellow);
+  --cta-text:             var(--color-deep-navy);
+  --cta-hover-bg:         var(--color-bolt-amber);
+  --cta-secondary-bg:     var(--color-brand-blue);
+  --cta-secondary-text:   var(--color-white);
+
+  /* Alert */
+  --alert-color:          var(--color-bolt-orange);
+
+  /* Gradients */
+  --gradient-bolt:        linear-gradient(135deg, var(--color-bolt-yellow) 0%, var(--color-bolt-amber) 50%, var(--color-bolt-orange) 100%);
+  --gradient-blues:       linear-gradient(135deg, var(--color-electric-blue) 0%, var(--color-brand-blue) 50%, var(--color-deep-navy) 100%);
+
+  /* ── Elevation / Shadows ──────────────────────────────── */
+  --shadow-1:             0 2px 8px rgba(14, 42, 92, 0.10);
+  --shadow-2:             0 8px 24px rgba(14, 42, 92, 0.18);
+  --shadow-3:             0 16px 48px rgba(14, 42, 92, 0.24);
+
+  /* ── Border Radii ─────────────────────────────────────── */
+  --radius-sm:            4px;
+  --radius-md:            6px;
+  --radius-lg:            8px;
+  --radius-xl:            12px;
+  --radius-pill:          999px;
+
+  /* ── Spacing Scale (8px base) ─────────────────────────── */
+  --space-1:              4px;
+  --space-2:              8px;
+  --space-3:              12px;
+  --space-4:              16px;
+  --space-6:              24px;
+  --space-8:              32px;
+  --space-12:             48px;
+  --space-16:             64px;
+  --space-24:             96px;
+  --space-32:             128px;
+
+  /* ── Typography ───────────────────────────────────────── */
+  --font-display:         'Archivo', sans-serif;
+  --font-body:            'Manrope', sans-serif;
+
+  /* Font Sizes */
+  --text-xs:              11px;
+  --text-sm:              13px;
+  --text-base:            16px;
+  --text-md:              18px;
+  --text-lg:              22px;
+  --text-xl:              28px;
+  --text-2xl:             36px;
+  --text-3xl:             48px;
+  --text-4xl:             64px;
+  --text-5xl:             80px;
+
+  /* Font Weights */
+  --weight-regular:       400;
+  --weight-medium:        500;
+  --weight-semibold:      600;
+  --weight-bold:          700;
+  --weight-black:         900;
+
+  /* Line Heights */
+  --leading-tight:        1.1;
+  --leading-snug:         1.25;
+  --leading-normal:       1.5;
+  --leading-relaxed:      1.65;
+
+  /* Letter Spacing */
+  --tracking-tight:       -0.02em;
+  --tracking-normal:      0em;
+  --tracking-wide:        0.05em;
+  --tracking-wider:       0.10em;
+  --tracking-widest:      0.15em;
+}
+
+/* ── Semantic Type Styles ─────────────────────────────────── */
+
+.display {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-black);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-primary);
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  color: var(--fg-primary);
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-snug);
+  color: var(--fg-primary);
+}
+
+p, .body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-relaxed);
+  color: var(--fg-primary);
+}
+
+.body-sm {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--fg-muted);
+}
+
+.label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.tagline {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  font-style: italic;
+  color: var(--fg-primary);
+}
+
+code, .mono {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: var(--text-sm);
+  background: var(--bg-subtle);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  color: var(--color-brand-blue);
+}

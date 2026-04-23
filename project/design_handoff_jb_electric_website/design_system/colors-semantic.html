@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 20px; }
+  .group { margin-bottom: 18px; }
+  .group:last-child { margin-bottom: 0; }
+  .group-label { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 700; color: #6B7A99; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 10px; }
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .token { border-radius: 6px; overflow: hidden; box-shadow: 0 2px 8px rgba(14,42,92,0.10); background: #fff; }
+  .swatch { height: 44px; }
+  .info { padding: 8px 10px; }
+  .var { font-size: 10px; color: #2E5AAA; font-weight: 700; }
+  .desc { font-size: 10px; color: #9BAABB; margin-top: 2px; line-height: 1.3; }
+</style>
+</head><body>
+
+<div class="group">
+  <div class="group-label">Text Roles</div>
+  <div class="grid">
+    <div class="token"><div class="swatch" style="background:#0E2A5C;"></div><div class="info"><div class="var">--fg-primary</div><div class="desc">Headings, body text</div></div></div>
+    <div class="token"><div class="swatch" style="background:#6B7A99;"></div><div class="info"><div class="var">--fg-muted</div><div class="desc">Paragraphs, captions</div></div></div>
+    <div class="token"><div class="swatch" style="background:#9BAABB;"></div><div class="info"><div class="var">--fg-subtle</div><div class="desc">Footnotes, meta</div></div></div>
+    <div class="token"><div class="swatch" style="background:#1B3D8F;"></div><div class="info"><div class="var">--fg-link</div><div class="desc">Links, learn more</div></div></div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-label">Surface Roles</div>
+  <div class="grid">
+    <div class="token"><div class="swatch" style="background:#FFFFFF; border:1px solid rgba(14,42,92,0.08);"></div><div class="info"><div class="var">--bg-base</div><div class="desc">Page, cards</div></div></div>
+    <div class="token"><div class="swatch" style="background:#F4F6FB;"></div><div class="info"><div class="var">--bg-subtle</div><div class="desc">Panels, sections</div></div></div>
+    <div class="token"><div class="swatch" style="background:#0E2A5C;"></div><div class="info"><div class="var">--bg-brand</div><div class="desc">Header, hero, info card</div></div></div>
+    <div class="token"><div class="swatch" style="background:#07193A;"></div><div class="info"><div class="var">--bg-brand-deep</div><div class="desc">Footer top</div></div></div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-label">Accent &amp; State</div>
+  <div class="grid">
+    <div class="token"><div class="swatch" style="background:#FFD00E;"></div><div class="info"><div class="var">--accent</div><div class="desc">Primary CTA, highlights</div></div></div>
+    <div class="token"><div class="swatch" style="background:#F7A823;"></div><div class="info"><div class="var">--accent-hover</div><div class="desc">CTA hover</div></div></div>
+    <div class="token"><div class="swatch" style="background:#F26A21;"></div><div class="info"><div class="var">--alert</div><div class="desc">Emergency / urgent</div></div></div>
+    <div class="token"><div class="swatch" style="background:rgba(255,208,14,0.15); border: 1px solid rgba(255,208,14,0.25);"></div><div class="info"><div class="var">--accent-tint</div><div class="desc">Badge bg on navy</div></div></div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-label">Border &amp; Divider</div>
+  <div class="grid">
+    <div class="token"><div class="swatch" style="background:rgba(14,42,92,0.08); border:1px solid rgba(14,42,92,0.12);"></div><div class="info"><div class="var">--border-default</div><div class="desc">Cards, dividers (light)</div></div></div>
+    <div class="token"><div class="swatch" style="background:rgba(14,42,92,0.12);"></div><div class="info"><div class="var">--border-input</div><div class="desc">Form inputs idle</div></div></div>
+    <div class="token"><div class="swatch" style="background:#FFD00E;"></div><div class="info"><div class="var">--border-focus</div><div class="desc">Inputs on focus</div></div></div>
+    <div class="token"><div class="swatch" style="background:rgba(255,255,255,0.08);"></div><div class="info"><div class="var">--border-dark</div><div class="desc">Dividers on navy</div></div></div>
+  </div>
+</div>
+
+</body></html>

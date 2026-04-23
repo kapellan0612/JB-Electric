@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  .label { font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700; color: #6B7A99; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 12px; }
+
+  /* Light variant — hero floating card */
+  .light { background: #fff; border-radius: 12px; padding: 22px 24px 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.06); }
+  .light .head { display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 12px; margin-bottom: 6px; border-bottom: 1px solid rgba(14,42,92,0.08); }
+  .light .head .t { font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 18px; color: #0E2A5C; letter-spacing: -0.01em; }
+  .light .head .s { font-family: 'Manrope', sans-serif; font-size: 9px; font-weight: 700; color: #2E5AAA; text-transform: uppercase; letter-spacing: 0.12em; }
+  .light ul { list-style: none; padding: 4px 0 0; margin: 0; }
+  .light li { display: flex; align-items: center; gap: 12px; padding: 9px 6px; font-family: 'Archivo', sans-serif; font-size: 14px; font-weight: 700; color: #0E2A5C; border-radius: 5px; }
+  .light .dot { width: 20px; height: 20px; border-radius: 50%; background: #FFD00E; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  /* Dark variant — service list inside navy panel */
+  .dark { background: #0E2A5C; border-radius: 12px; padding: 22px 24px 20px; box-shadow: 0 16px 48px rgba(14,42,92,0.22); }
+  .dark .label { color: rgba(255,255,255,0.4); margin-bottom: 14px; }
+  .dark ul { list-style: none; padding: 0; margin: 0; }
+  .dark li { display: flex; align-items: center; gap: 12px; padding: 10px 0; font-family: 'Manrope', sans-serif; font-size: 14px; font-weight: 600; color: #fff; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .dark li:last-child { border-bottom: none; }
+  .dark .dot { width: 20px; height: 20px; border-radius: 50%; background: #FFD00E; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+</style>
+</head><body>
+
+  <div>
+    <div class="label">Light · Floating Hero Card</div>
+    <div class="light">
+      <div class="head">
+        <div class="t">Our Services</div>
+        <div class="s">Tap to Learn More</div>
+      </div>
+      <ul>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Electrical Installations</li>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Lighting Solutions</li>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Wiring &amp; Rewiring</li>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>EV Charger Installs</li>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Panel Upgrades</li>
+      </ul>
+    </div>
+  </div>
+
+  <div>
+    <div class="dark">
+      <div class="label">Dark · On Navy Panel</div>
+      <ul>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Licensed &amp; Insured</li>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Fixed Price Upfront</li>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Permitted Work</li>
+        <li><span class="dot"><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#0E2A5C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Emergency Callouts</li>
+      </ul>
+    </div>
+  </div>
+
+</body></html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 22px; }
+  .group { margin-bottom: 18px; }
+  .group:last-child { margin-bottom: 0; }
+  .group-label { font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700; color: #6B7A99; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 10px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .row.dark { background: #0E2A5C; padding: 14px 16px; border-radius: 10px; }
+
+  /* Hero eyebrow — yellow pill, navy archivo caps, soft yellow glow */
+  .eyebrow { font-family: 'Archivo', sans-serif; font-size: 12px; font-weight: 800; letter-spacing: 0.10em; text-transform: uppercase; color: #0E2A5C; background: #FFD00E; padding: 9px 18px; border-radius: 999px; box-shadow: 0 4px 18px rgba(255,208,14,0.35); display: inline-flex; align-items: center; gap: 8px; }
+
+  /* Section eyebrow — small caps + yellow line marker (services title) */
+  .section-eb { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #1B3D8F; display: inline-flex; align-items: center; gap: 10px; }
+  .section-eb::before { content:''; display: inline-block; width: 24px; height: 2px; background: #FFD00E; border-radius: 1px; }
+
+  /* Footer badge — outlined yellow tint on navy */
+  .badge-footer { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #FFD00E; background: rgba(255,208,14,0.15); border: 1px solid rgba(255,208,14,0.25); padding: 5px 10px; border-radius: 4px; }
+
+  /* Trust chip — icon + bold label, used in hero + info card */
+  .trust { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 600; display: inline-flex; align-items: center; gap: 7px; }
+  .trust.on-dark { color: rgba(255,255,255,0.95); }
+  .trust.on-light { color: #0E2A5C; }
+
+  /* Small navy/yellow pill pair */
+  .pill-navy { font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 800; letter-spacing: 0.10em; text-transform: uppercase; color: #FFD00E; background: #0E2A5C; padding: 5px 12px; border-radius: 999px; }
+  .pill-light { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #1B3D8F; background: #E8EDF8; padding: 5px 12px; border-radius: 999px; }
+
+  /* Alert */
+  .badge-alert { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; background: #F26A21; padding: 5px 10px; border-radius: 4px; }
+</style>
+</head><body>
+
+  <div class="group">
+    <div class="group-label">Hero Eyebrow · Yellow Pill w/ Glow</div>
+    <div class="row dark">
+      <span class="eyebrow">⚡ Licensed &amp; Insured · MA + NH</span>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Section Eyebrow · Small Caps + Yellow Marker</div>
+    <div class="row">
+      <span class="section-eb">What We Do</span>
+      <span class="section-eb">Get in Touch</span>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Trust Chips · Icon + Bold Label</div>
+    <div class="row dark">
+      <span class="trust on-dark">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFD00E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Fully Insured
+      </span>
+      <span class="trust on-dark">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFD00E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>
+        Permitted Work
+      </span>
+      <span class="trust on-dark">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFD00E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+        Fixed Price Upfront
+      </span>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Footer Badges · Yellow tint on navy</div>
+    <div class="row dark">
+      <span class="badge-footer">Fully Insured</span>
+      <span class="badge-footer">Licensed</span>
+      <span class="badge-footer">Free Quotes</span>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="group-label">Utility Pills &amp; Alert</div>
+    <div class="row">
+      <span class="pill-navy">Residential</span>
+      <span class="pill-navy">Commercial</span>
+      <span class="pill-light">MA + NH</span>
+      <span class="badge-alert">Emergency</span>
+    </div>
+  </div>
+
+</body></html>

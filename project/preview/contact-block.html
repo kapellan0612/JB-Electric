@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+
+  /* Light contact block (form intro style) */
+  .block-light { background: #fff; box-shadow: 0 2px 8px rgba(14,42,92,0.10); border-radius: 10px; padding: 22px 24px; }
+  .eyebrow { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: #1B3D8F; display: inline-flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .eyebrow::before { content:''; display: inline-block; width: 24px; height: 2px; background: #FFD00E; border-radius: 1px; }
+  .title { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 28px; color: #0E2A5C; letter-spacing: -0.03em; line-height: 1; margin-bottom: 14px; }
+  .phone { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 26px; color: #0E2A5C; letter-spacing: -0.01em; text-decoration: none; display: block; margin-bottom: 4px; }
+  .email { font-family: 'Manrope', sans-serif; font-size: 12px; font-weight: 600; color: rgba(14,42,92,0.6); letter-spacing: 0.04em; text-decoration: none; display: block; margin-bottom: 14px; }
+  .trust-light { display: flex; gap: 6px; flex-wrap: wrap; }
+  .trust-light span { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 4px; background: rgba(14,42,92,0.06); color: #1B3D8F; }
+
+  /* Dark info card (matches Contact.jsx sidebar) */
+  .block-dark { background: #0E2A5C; border-radius: 12px; padding: 24px 22px; box-shadow: 0 16px 48px rgba(14,42,92,0.22); }
+  .bar { height: 3px; background: linear-gradient(90deg, #FFD00E, #F7A823, #F26A21); border-radius: 2px; margin-bottom: 20px; }
+  .infoLabel { font-family: 'Manrope', sans-serif; font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.30); text-transform: uppercase; letter-spacing: 0.16em; margin-bottom: 4px; }
+  .phoneBig { font-family: 'Archivo', sans-serif; font-weight: 900; font-size: 28px; color: #FFD00E; letter-spacing: -0.01em; text-decoration: none; display: block; margin-bottom: 14px; }
+  .infoValue { font-family: 'Manrope', sans-serif; font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.72); text-decoration: none; display: block; line-height: 1.6; margin-bottom: 14px; }
+  .divider { height: 1px; background: rgba(255,255,255,0.08); margin: 14px 0; }
+  .trust-dark { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 12px; }
+  .trust-dark span { font-family: 'Manrope', sans-serif; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 6px; }
+</style>
+</head><body>
+
+  <div class="block-light">
+    <div class="eyebrow">Get in Touch</div>
+    <div class="title">Request a<br>Free Quote</div>
+    <a href="tel:9783979878" class="phone">978.397.9878</a>
+    <a href="mailto:jhornetbc@gmail.com" class="email">JHORNETBC@GMAIL.COM</a>
+    <div class="trust-light">
+      <span>Fully Insured</span>
+      <span>Licensed</span>
+      <span>Free Quotes</span>
+    </div>
+  </div>
+
+  <div class="block-dark">
+    <div class="bar"></div>
+    <div class="infoLabel">Call Us</div>
+    <a href="#" class="phoneBig">978.397.9878</a>
+    <div class="infoLabel">Email</div>
+    <div class="infoValue">JHORNETBC@GMAIL.COM</div>
+    <div class="divider"></div>
+    <div class="infoLabel">Hours</div>
+    <div class="infoValue">Mon–Fri · 7am–6pm<br><span style="color:#F7A823">Emergency callouts available</span></div>
+    <div class="divider"></div>
+    <div class="trust-dark">
+      <span><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#FFD00E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Fully Insured</span>
+      <span><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#FFD00E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Licensed</span>
+      <span><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#FFD00E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Free Quotes</span>
+      <span><svg width="11" height="11" viewBox="0 0 13 13" fill="none"><polyline points="2,7 5,10 11,3" stroke="#FFD00E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Res + Com</span>
+    </div>
+  </div>
+
+</body></html>

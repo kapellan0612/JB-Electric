@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 20px; }
+  .section { margin-bottom: 18px; }
+  .label { font-size: 10px; font-weight: 600; color: #9BAABB; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+  .scale { display: flex; align-items: flex-end; gap: 6px; }
+  .sp { background: #1B3D8F; border-radius: 2px; opacity: 0.85; }
+  .sp-label { font-size: 9px; color: #6B7A99; text-align: center; margin-top: 4px; }
+  .sp-wrap { display: flex; flex-direction: column; align-items: center; }
+  .radii { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  .radius-box { background: #fff; border: 2px solid #1B3D8F; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; }
+  .radius-info { font-size: 9px; color: #6B7A99; text-align: center; margin-top: 4px; }
+</style>
+</head><body>
+  <div class="section">
+    <div class="label">Spacing Scale — 8px base</div>
+    <div class="scale">
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:4px;"></div><div class="sp-label">4</div></div>
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:8px;"></div><div class="sp-label">8</div></div>
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:12px;"></div><div class="sp-label">12</div></div>
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:16px;"></div><div class="sp-label">16</div></div>
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:24px;"></div><div class="sp-label">24</div></div>
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:32px;"></div><div class="sp-label">32</div></div>
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:48px;"></div><div class="sp-label">48</div></div>
+      <div class="sp-wrap"><div class="sp" style="width:16px;height:64px;"></div><div class="sp-label">64</div></div>
+    </div>
+  </div>
+  <div class="section" style="margin-bottom:0;">
+    <div class="label">Border Radii</div>
+    <div class="radii">
+      <div><div class="radius-box" style="border-radius:4px;"></div><div class="radius-info">4px<br>Badge</div></div>
+      <div><div class="radius-box" style="border-radius:6px;"></div><div class="radius-info">6px<br>Compact btn</div></div>
+      <div><div class="radius-box" style="border-radius:8px;"></div><div class="radius-info">8px<br>Input, ghost</div></div>
+      <div><div class="radius-box" style="border-radius:10px;"></div><div class="radius-info">10px<br>Primary CTA</div></div>
+      <div><div class="radius-box" style="border-radius:12px;"></div><div class="radius-info">12px<br>Card, panel</div></div>
+      <div><div class="radius-box" style="border-radius:999px;width:72px;height:32px;"></div><div class="radius-info">Pill<br>Eyebrow</div></div>
+    </div>
+  </div>
+</body></html>

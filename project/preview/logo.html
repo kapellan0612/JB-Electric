@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Manrope:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Manrope', sans-serif; background: #F4F6FB; padding: 20px; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+  .box { border-radius: 10px; padding: 22px 20px 14px; display: flex; flex-direction: column; align-items: center; gap: 14px; min-height: 150px; justify-content: center; }
+  .on-white { background: #fff; border: 1px solid rgba(14,42,92,0.08); }
+  .on-navy { background: #0E2A5C; }
+  .on-blue { background: #2E5AAA; }
+  .logo-img { height: 78px; width: auto; }
+  .logo-img.small { height: 56px; }
+  .label { font-family: 'Archivo', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+  .label.dark { color: #9BAABB; }
+  .label.light { color: rgba(255,255,255,0.55); }
+</style>
+</head><body>
+  <div class="box on-white">
+    <img src="../assets/jb_electric_logo.png" class="logo-img" alt="JB Electric primary"/>
+    <div class="label dark">Primary · On Light</div>
+  </div>
+  <div class="box on-navy">
+    <img src="../assets/jb_logo_white.png" class="logo-img" alt="JB Electric white"/>
+    <div class="label light">Header · On Navy</div>
+  </div>
+  <div class="box on-navy">
+    <img src="../assets/jb_logo_contact.png" class="logo-img" alt="JB Electric contact"/>
+    <div class="label light">Contact · On Navy</div>
+  </div>
+  <div class="box on-navy">
+    <img src="../assets/jb_logo_footer.png" class="logo-img" alt="JB Electric footer"/>
+    <div class="label light">Footer · On Navy</div>
+  </div>
+  <div class="box on-blue">
+    <img src="../assets/jb_logo_white.png" class="logo-img" alt="JB Electric on blue"/>
+    <div class="label light">On Brand Blue</div>
+  </div>
+  <div class="box on-white">
+    <img src="../assets/jb_electric_logo.png" class="logo-img small" alt="JB Electric small"/>
+    <div class="label dark">Minimum Size · 56px</div>
+  </div>
+</body></html>
