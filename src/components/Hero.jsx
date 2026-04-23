@@ -46,7 +46,7 @@ export default function Hero({ setScreen }) {
               <span className="jb-hero-line d2" style={styles.lineWhite}>No Surprises.</span><br />
               <span className="jb-hero-line d3" style={styles.lineWhite}>No Guesswork.</span><br />
               <span className="jb-hero-line d4" style={styles.lineYellow}>Just Electrical</span><br />
-              <span className="jb-hero-line d5" style={{ ...styles.lineYellow, position: 'relative', display: 'inline-block' }}>
+              <span className="jb-hero-line d5" style={{ ...styles.lineYellow, position: 'relative', display: 'inline-block', whiteSpace: 'nowrap' }}>
                 Work Done Right.
                 <span
                   className="jb-underline-draw zu1"
