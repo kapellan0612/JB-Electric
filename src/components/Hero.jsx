@@ -192,7 +192,7 @@ const styles = {
   sub: {
     fontFamily: "'Manrope', sans-serif",
     fontSize: 15,
-    fontWeight: 400,
+    fontWeight: 600,
     color: 'rgba(255,255,255,0.85)',
     lineHeight: 1.7,
     marginBottom: 32,

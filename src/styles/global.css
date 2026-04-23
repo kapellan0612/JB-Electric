@@ -468,7 +468,8 @@ input, select, textarea, button { font-family: inherit; }
   .jb-hamburger         { display: flex; align-items: center; justify-content: center; margin-left: auto; }
   .jb-mobile-menu       { display: flex; flex-direction: column; padding: 12px 20px 20px; background: rgba(14,42,92,0.98); border-top: 1px solid rgba(255,208,14,0.15); gap: 2px; }
 
-  .jb-hero-card-hide    { display: none; }
+  .jb-hero-photo        { display: none !important; }
+  .jb-hero-card-hide    { display: flex !important; justify-content: center !important; }
   .jb-cta-strip-inner   { flex-direction: column; align-items: flex-start; gap: 16px; }
   .jb-cta-actions       { margin-left: 0 !important; }
 
