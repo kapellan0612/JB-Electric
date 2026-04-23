@@ -147,6 +147,7 @@ const styles = {
     position: 'relative',
     overflow: 'hidden',
     minHeight: 680,
+    borderBottom: '3px solid #FFD00E',
   },
   photoWrap: {
     position: 'absolute', inset: 0,
