@@ -1,18 +1,51 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile';
 import logoContact from '../assets/jb_logo_contact.png';
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '', website: '' });
   const [focused, setFocused] = useState(null);
+  const [error, setError] = useState(null);
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  const turnstileRef = useRef(null);
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-  const handleSubmit = e => {
+
+  const handleSubmit = async e => {
     e.preventDefault();
     if (submitting) return;
+    setError(null);
+
+    if (!turnstileToken) {
+      setError('Please complete the verification check below.');
+      return;
+    }
+
     setSubmitting(true);
-    setTimeout(() => { setSubmitting(false); setSent(true); }, 1800);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, turnstileToken }),
+      });
+
+      if (res.status === 200) {
+        setSent(true);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || 'Something went wrong. Please try again or call 978.397.9878.');
+        turnstileRef.current?.reset();
+        setTurnstileToken(null);
+      }
+    } catch {
+      setError('Network error. Please try again or call 978.397.9878.');
+      turnstileRef.current?.reset();
+      setTurnstileToken(null);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputStyle = name => ({
@@ -78,7 +111,7 @@ export default function Contact() {
                 <div style={styles.field}>
                   <label style={styles.label}>Email Address</label>
                   <input className="jb-input" name="email" type="email" value={form.email} onChange={handleChange}
-                    style={inputStyle('email')} placeholder="you@example.com"
+                    style={inputStyle('email')}
                     onFocus={() => setFocused('email')} onBlur={() => setFocused(null)} required />
                 </div>
                 <div style={styles.field}>
@@ -98,9 +131,35 @@ export default function Contact() {
                   <label style={styles.label}>Message</label>
                   <textarea className="jb-input" name="message" value={form.message} onChange={handleChange}
                     style={{ ...inputStyle('message'), height: 120, resize: 'vertical' }}
-                    placeholder="Describe your project or issue…"
                     onFocus={() => setFocused('message')} onBlur={() => setFocused(null)} />
                 </div>
+
+                {/* Honeypot — hidden from humans, catches bots */}
+                <input
+                  type="text"
+                  name="website"
+                  value={form.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={styles.honeypot}
+                />
+
+                {/* Cloudflare Turnstile */}
+                <div style={styles.turnstileWrap}>
+                  <Turnstile
+                    ref={turnstileRef}
+                    siteKey={import.meta.env.VITE_TURNSTILE_SITE_KEY}
+                    onSuccess={setTurnstileToken}
+                    onExpire={() => setTurnstileToken(null)}
+                    onError={() => setTurnstileToken(null)}
+                    options={{ theme: 'light' }}
+                  />
+                </div>
+
+                {error && <div style={styles.errorBox} role="alert">{error}</div>}
+
                 <button
                   type="submit"
                   disabled={submitting}
@@ -291,6 +350,28 @@ const styles = {
     alignItems: 'center',
     gap: 8,
     boxShadow: '0 4px 16px rgba(255,208,14,0.25)',
+  },
+  honeypot: {
+    position: 'absolute',
+    left: -9999,
+    width: 1,
+    height: 1,
+    opacity: 0,
+    pointerEvents: 'none',
+  },
+  turnstileWrap: {
+    minHeight: 65,
+  },
+  errorBox: {
+    background: '#FEF2F2',
+    border: '1px solid #FCA5A5',
+    color: '#991B1B',
+    borderRadius: 8,
+    padding: '12px 16px',
+    fontFamily: "'Manrope', sans-serif",
+    fontSize: 14,
+    fontWeight: 500,
+    lineHeight: 1.5,
   },
   success: {
     background: '#fff',
