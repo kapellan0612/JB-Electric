@@ -1,18 +1,61 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import { Turnstile } from '@marsidev/react-turnstile';
 import logoContact from '../assets/jb_logo_contact.png';
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
+  const [errorMessage, setErrorMessage] = useState('');
+  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '', website: '' });
   const [focused, setFocused] = useState(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const turnstileRef = useRef(null);
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-  const handleSubmit = e => {
+
+  const resetTurnstile = () => {
+    setTurnstileToken('');
+    turnstileRef.current?.reset?.();
+  };
+
+  const handleSubmit = async e => {
     e.preventDefault();
     if (submitting) return;
+    setErrorMessage('');
+
+    if (!turnstileToken) {
+      setErrorMessage('Please complete the verification before submitting.');
+      return;
+    }
+
     setSubmitting(true);
-    setTimeout(() => { setSubmitting(false); setSent(true); }, 1800);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...form, turnstileToken }),
+      });
+
+      if (res.status === 200) {
+        setSent(true);
+        return;
+      }
+
+      let msg = 'Something went wrong. Please try again or call 978.397.9878.';
+      try {
+        const data = await res.json();
+        if (data?.error) msg = data.error;
+      } catch {}
+      setErrorMessage(msg);
+      resetTurnstile();
+    } catch {
+      setErrorMessage('Network error. Please check your connection and try again.');
+      resetTurnstile();
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputStyle = name => ({
@@ -60,6 +103,17 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} style={styles.form}>
+                {/* Honeypot - hidden from real users */}
+                <input
+                  type="text"
+                  name="website"
+                  value={form.website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={styles.honeypot}
+                />
                 {/* jb-form-row handles responsive columns */}
                 <div className="jb-form-row" style={styles.row}>
                   <div style={styles.field}>
@@ -78,7 +132,7 @@ export default function Contact() {
                 <div style={styles.field}>
                   <label style={styles.label}>Email Address</label>
                   <input className="jb-input" name="email" type="email" value={form.email} onChange={handleChange}
-                    style={inputStyle('email')} placeholder="you@example.com"
+                    style={inputStyle('email')} placeholder=""
                     onFocus={() => setFocused('email')} onBlur={() => setFocused(null)} required />
                 </div>
                 <div style={styles.field}>
@@ -98,9 +152,24 @@ export default function Contact() {
                   <label style={styles.label}>Message</label>
                   <textarea className="jb-input" name="message" value={form.message} onChange={handleChange}
                     style={{ ...inputStyle('message'), height: 120, resize: 'vertical' }}
-                    placeholder="Describe your project or issue…"
+                    placeholder=""
                     onFocus={() => setFocused('message')} onBlur={() => setFocused(null)} />
                 </div>
+                {TURNSTILE_SITE_KEY && (
+                  <div style={styles.turnstile}>
+                    <Turnstile
+                      ref={turnstileRef}
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={token => setTurnstileToken(token)}
+                      onError={() => setTurnstileToken('')}
+                      onExpire={() => setTurnstileToken('')}
+                      options={{ theme: 'light' }}
+                    />
+                  </div>
+                )}
+                {errorMessage && (
+                  <div role="alert" style={styles.error}>{errorMessage}</div>
+                )}
                 <button
                   type="submit"
                   disabled={submitting}
@@ -374,5 +443,26 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: 7,
+  },
+  honeypot: {
+    position: 'absolute',
+    left: -9999,
+    width: 1,
+    height: 1,
+    opacity: 0,
+    pointerEvents: 'none',
+  },
+  turnstile: {
+    marginTop: 4,
+  },
+  error: {
+    fontFamily: "'Manrope', sans-serif",
+    fontSize: 14,
+    color: '#B91C1C',
+    background: '#FEF2F2',
+    border: '1px solid #FCA5A5',
+    borderRadius: 8,
+    padding: '12px 16px',
+    lineHeight: 1.5,
   },
 };
