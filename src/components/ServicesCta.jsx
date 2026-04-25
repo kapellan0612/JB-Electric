@@ -21,7 +21,7 @@ export default function ServicesCta() {
             style={styles.ctaBtnPrimary}
             onClick={() => navigate('/contact')}
           >
-            Request Free Quote
+            Request Free Estimate
           </button>
           <a href="tel:9783979878" className="jb-btn-ghost" style={styles.ctaBtnSecondary}>
             978.397.9878

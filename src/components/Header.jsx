@@ -51,7 +51,7 @@ export default function Header() {
             style={styles.cta}
             onClick={() => { closeMenu(); navigate('/contact'); }}
           >
-            Free Quote
+            Free Estimate
           </button>
         </div>
 
@@ -100,7 +100,7 @@ export default function Header() {
             style={styles.mobileCta}
             onClick={() => { closeMenu(); navigate('/contact'); }}
           >
-            Get a Free Quote →
+            Get a Free Estimate →
           </button>
         </div>
       )}

@@ -76,7 +76,7 @@ export default function Services() {
             style={styles.headerCta}
             onClick={() => navigate('/contact')}
           >
-            Request a Free Quote →
+            Request a Free Estimate →
           </button>
         </div>
       </div>
@@ -109,7 +109,7 @@ export default function Services() {
                     style={styles.quoteBtn}
                     onClick={e => { e.stopPropagation(); navigate('/contact'); }}
                   >
-                    Get a Quote →
+                    Get an Estimate →
                   </button>
                 ) : (
                   <span className="jb-learn-more" style={styles.learnMore}>Learn more →</span>

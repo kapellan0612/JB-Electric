@@ -17,7 +17,7 @@ export default function Footer() {
               Licensed and insured electrical contractor serving residential and commercial clients across Massachusetts and southern New Hampshire.
             </p>
             <div style={styles.badges}>
-              {['Fully Insured', 'MA + NH Licensed', 'Free Quotes'].map(b => (
+              {['Fully Insured', 'MA + NH Licensed', 'Free Estimates'].map(b => (
                 <span key={b} style={styles.badge}>{b}</span>
               ))}
             </div>

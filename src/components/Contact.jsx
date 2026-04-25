@@ -47,7 +47,7 @@ export default function Contact() {
             <div style={styles.eyebrow}><span style={styles.eyebrowLine} />Get in Touch</div>
             <h1 style={styles.title}>
               Request a<br />
-              <span style={styles.titleAccent}>Free Quote</span>
+              <span style={styles.titleAccent}>Free Estimate</span>
             </h1>
           </div>
           <div style={styles.topContact}>
@@ -183,7 +183,7 @@ export default function Contact() {
               </div>
               <div style={styles.divider} />
               <div style={styles.trustGrid}>
-                {['Fully Insured', 'Licensed', 'Free Quotes', 'Res + Com'].map(b => (
+                {['Fully Insured', 'Licensed', 'Free Estimates', 'Res + Com'].map(b => (
                   <div key={b} style={styles.trustItem}>
                     <svg width="11" height="11" viewBox="0 0 13 13" fill="none">
                       <polyline points="2,7 5,10 11,3" stroke="#FFD00E" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
