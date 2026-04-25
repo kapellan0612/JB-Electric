@@ -4,15 +4,32 @@ import logoContact from '../assets/jb_logo_contact.png';
 export default function Contact() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '' });
+  const [form, setForm] = useState({ name: '', phone: '', email: '', service: '', message: '', hp_company: '' });
   const [focused, setFocused] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (submitting) return;
+    setError(null);
     setSubmitting(true);
-    setTimeout(() => { setSubmitting(false); setSent(true); }, 1800);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'Something went wrong. Please call us at 978.397.9878.');
+      }
+      setSent(true);
+    } catch (err) {
+      setError(err.message || 'Network error. Please try again or call 978.397.9878.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const inputStyle = name => ({
@@ -59,7 +76,18 @@ export default function Contact() {
                 <div style={styles.successSub}>We'll be in touch within one business day. For urgent needs, call 978.397.9878.</div>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} style={styles.form}>
+              <form onSubmit={handleSubmit} style={styles.form} noValidate>
+                {/* Honeypot — hidden from real users; bots fill it and get silently dropped */}
+                <input
+                  type="text"
+                  name="hp_company"
+                  value={form.hp_company}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  aria-hidden="true"
+                  style={styles.honeypot}
+                />
                 {/* jb-form-row handles responsive columns */}
                 <div className="jb-form-row" style={styles.row}>
                   <div style={styles.field}>
@@ -101,6 +129,14 @@ export default function Contact() {
                     placeholder="Describe your project or issue…"
                     onFocus={() => setFocused('message')} onBlur={() => setFocused(null)} />
                 </div>
+                {error && (
+                  <div role="alert" style={styles.errorBox}>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#B42318" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                      <circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" />
+                    </svg>
+                    <span>{error}</span>
+                  </div>
+                )}
                 <button
                   type="submit"
                   disabled={submitting}
@@ -274,6 +310,27 @@ const styles = {
   inputFocused: {
     borderColor: '#FFD00E',
     boxShadow: '0 0 0 3px rgba(255,208,14,0.15)',
+  },
+  honeypot: {
+    position: 'absolute',
+    left: '-9999px',
+    width: 1,
+    height: 1,
+    opacity: 0,
+    pointerEvents: 'none',
+  },
+  errorBox: {
+    fontFamily: "'Manrope', sans-serif",
+    fontSize: 14,
+    color: '#B42318',
+    background: '#FEF3F2',
+    border: '1px solid #FDA29B',
+    borderRadius: 8,
+    padding: '12px 14px',
+    display: 'flex',
+    alignItems: 'flex-start',
+    gap: 10,
+    lineHeight: 1.5,
   },
   submit: {
     fontFamily: "'Archivo', sans-serif",
