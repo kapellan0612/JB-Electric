@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jbelectric.com/sitemap.xml
+Sitemap: https://jbelectricllc.net/sitemap.xml

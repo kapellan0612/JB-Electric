@@ -1,5 +1,4 @@
-// Update SITE_URL to your production domain when ready (used for canonical + OG + sitemap).
-export const SITE_URL = 'https://jbelectric.com';
+export const SITE_URL = 'https://jbelectricllc.net';
 export const SITE_NAME = 'JB Electric';
 export const PHONE = '978.397.9878';
 export const PHONE_TEL = '+19783979878';
