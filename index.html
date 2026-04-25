@@ -4,8 +4,72 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JB Electric — Licensed Electricians in MA & NH</title>
-    <meta name="description" content="JB Electric handles panel upgrades, rewiring, lighting, EV chargers, and electrical repairs across the Merrimack Valley and southern New Hampshire. Licensed, insured, and permitted work." />
+    <meta name="theme-color" content="#0E2A5C" />
+
+    <!-- Geo targeting hints -->
+    <meta name="geo.region" content="US-MA;US-NH" />
+    <meta name="geo.placename" content="Methuen, Massachusetts" />
+    <meta name="ICBM" content="42.7262,-71.1909" />
+
+    <!-- LocalBusiness structured data (applies to all pages) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Electrician",
+      "name": "JB Electric",
+      "description": "Licensed and insured electrical contractor serving residential and commercial clients across Massachusetts and southern New Hampshire. Panel upgrades, rewiring, lighting, EV charger installation, and electrical repairs.",
+      "url": "https://jbelectric.com",
+      "telephone": "+1-978-397-9878",
+      "email": "jhornetbc@gmail.com",
+      "priceRange": "$$",
+      "image": "https://jbelectric.com/favicon.svg",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "MA",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        { "@type": "State", "name": "Massachusetts" },
+        { "@type": "State", "name": "New Hampshire" },
+        { "@type": "City", "name": "Lowell", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Lawrence", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Methuen", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Haverhill", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Andover", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "North Andover", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Tewksbury", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Dracut", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Chelmsford", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Billerica", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Wilmington", "containedInPlace": "Massachusetts" },
+        { "@type": "City", "name": "Salem", "containedInPlace": "New Hampshire" },
+        { "@type": "City", "name": "Nashua", "containedInPlace": "New Hampshire" },
+        { "@type": "City", "name": "Derry", "containedInPlace": "New Hampshire" },
+        { "@type": "City", "name": "Pelham", "containedInPlace": "New Hampshire" },
+        { "@type": "City", "name": "Hudson", "containedInPlace": "New Hampshire" },
+        { "@type": "City", "name": "Windham", "containedInPlace": "New Hampshire" },
+        { "@type": "City", "name": "Londonderry", "containedInPlace": "New Hampshire" }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Electrical Services",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrical Panel Upgrades" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Wiring & Rewiring" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Lighting Installation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "EV Charger Installation" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electrical Repairs" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "New Construction Electrical" } }
+        ]
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "07:00",
+        "closes": "18:00"
+      }]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -1,40 +1,40 @@
 import { useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logoWhite from '../assets/jb_logo_white.png';
 
 const NAV_LINKS = [
-  { id: 'home', label: 'Home' },
-  { id: 'services', label: 'Services' },
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
+  { to: '/', label: 'Home' },
+  { to: '/services', label: 'Services' },
+  { to: '/about', label: 'About' },
+  { to: '/contact', label: 'Contact' },
 ];
 
-export default function Header({ currentScreen, setScreen }) {
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
-  const handleNav = (id) => { setScreen(id); setMenuOpen(false); };
+  const isActive = (to) => to === '/' ? pathname === '/' : pathname.startsWith(to);
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <header style={styles.header}>
       <div style={styles.inner}>
-        <img
-          src={logoWhite}
-          alt="JB Electric"
-          className="jb-logo"
-          style={styles.logo}
-          onClick={() => handleNav('home')}
-        />
+        <Link to="/" onClick={closeMenu} aria-label="JB Electric — home">
+          <img src={logoWhite} alt="JB Electric" className="jb-logo" style={styles.logo} />
+        </Link>
 
         {/* Desktop nav */}
-        <nav className="jb-nav-desktop">
+        <nav className="jb-nav-desktop" aria-label="Primary">
           {NAV_LINKS.map(link => (
-            <a
-              key={link.id}
-              className={`jb-nav-link ${currentScreen === link.id ? 'is-active' : ''}`}
-              onClick={() => handleNav(link.id)}
-              style={{ ...styles.navLink, ...(currentScreen === link.id ? styles.navLinkActive : {}) }}
+            <Link
+              key={link.to}
+              to={link.to}
+              className={`jb-nav-link ${isActive(link.to) ? 'is-active' : ''}`}
+              style={{ ...styles.navLink, ...(isActive(link.to) ? styles.navLinkActive : {}) }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
@@ -49,7 +49,7 @@ export default function Header({ currentScreen, setScreen }) {
           <button
             className="jb-btn-primary jb-btn-inverse-white"
             style={styles.cta}
-            onClick={() => handleNav('contact')}
+            onClick={() => { closeMenu(); navigate('/contact'); }}
           >
             Free Quote
           </button>
@@ -77,16 +77,17 @@ export default function Header({ currentScreen, setScreen }) {
       {menuOpen && (
         <div className="jb-mobile-menu">
           {NAV_LINKS.map(link => (
-            <a
-              key={link.id}
-              onClick={() => handleNav(link.id)}
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={closeMenu}
               style={{
                 ...styles.mobileLink,
-                ...(currentScreen === link.id ? styles.mobileLinkActive : {}),
+                ...(isActive(link.to) ? styles.mobileLinkActive : {}),
               }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <div style={styles.mobileDivider} />
           <a href="tel:9783979878" style={styles.mobilePhone}>
@@ -97,7 +98,7 @@ export default function Header({ currentScreen, setScreen }) {
           </a>
           <button
             style={styles.mobileCta}
-            onClick={() => handleNav('contact')}
+            onClick={() => { closeMenu(); navigate('/contact'); }}
           >
             Get a Free Quote →
           </button>
@@ -125,7 +126,7 @@ const styles = {
     alignItems: 'center',
     gap: 48,
   },
-  logo: { height: 56, width: 'auto', cursor: 'pointer', flexShrink: 0 },
+  logo: { height: 56, width: 'auto', cursor: 'pointer', flexShrink: 0, display: 'block' },
   navLink: {
     fontFamily: "'Manrope', sans-serif",
     fontSize: 14,

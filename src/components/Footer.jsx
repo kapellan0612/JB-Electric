@@ -1,6 +1,10 @@
+import { Link } from 'react-router-dom';
 import logoFooter from '../assets/jb_logo_footer.png';
+import { CITIES_MA, CITIES_NH } from '../config/site';
 
-export default function Footer({ setScreen }) {
+const TOP_TOWNS = ['Lowell', 'Lawrence', 'Methuen', 'Haverhill', 'Andover', 'Salem NH', 'Nashua', 'Derry'];
+
+export default function Footer() {
   return (
     <footer style={styles.footer}>
       <div style={styles.top}>
@@ -10,10 +14,10 @@ export default function Footer({ setScreen }) {
             <img src={logoFooter} alt="JB Electric" style={styles.logo} />
             <p style={styles.tagline}>"Wired for Excellence!"</p>
             <p style={styles.desc}>
-              Licensed and insured electrical contractor serving residential and commercial clients across Massachusetts.
+              Licensed and insured electrical contractor serving residential and commercial clients across Massachusetts and southern New Hampshire.
             </p>
             <div style={styles.badges}>
-              {['Fully Insured', 'Licensed', 'Free Quotes'].map(b => (
+              {['Fully Insured', 'MA + NH Licensed', 'Free Quotes'].map(b => (
                 <span key={b} style={styles.badge}>{b}</span>
               ))}
             </div>
@@ -22,30 +26,22 @@ export default function Footer({ setScreen }) {
           <div style={styles.col}>
             <div style={styles.colTitle}>Services</div>
             {['Electrical Installations', 'Lighting Solutions', 'Wiring & Rewiring', 'Electrical Repairs'].map(s => (
-              <div
+              <Link
                 key={s}
+                to="/services"
                 style={styles.link}
-                onClick={() => setScreen('services')}
                 onMouseEnter={e => e.currentTarget.style.color = '#FFD00E'}
                 onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
               >
                 {s}
-              </div>
+              </Link>
             ))}
           </div>
 
           <div style={styles.col}>
-            <div style={styles.colTitle}>Company</div>
-            {['Home', 'About', 'Contact'].map(p => (
-              <div
-                key={p}
-                style={styles.link}
-                onClick={() => setScreen(p.toLowerCase())}
-                onMouseEnter={e => e.currentTarget.style.color = '#FFD00E'}
-                onMouseLeave={e => e.currentTarget.style.color = 'rgba(255,255,255,0.55)'}
-              >
-                {p}
-              </div>
+            <div style={styles.colTitle}>Areas Served</div>
+            {TOP_TOWNS.map(t => (
+              <div key={t} style={styles.areaItem}>{t}</div>
             ))}
           </div>
 
@@ -53,14 +49,19 @@ export default function Footer({ setScreen }) {
             <div style={styles.colTitle}>Contact</div>
             <a href="tel:9783979878" style={styles.phoneBig}>978.397.9878</a>
             <a href="mailto:jhornetbc@gmail.com" style={styles.email}>JHORNETBC@GMAIL.COM</a>
-            <div style={styles.serviceArea}>Greater Massachusetts Area</div>
+            <div style={styles.serviceArea}>Merrimack Valley · Southern NH</div>
+            <div style={styles.colSubLinks}>
+              <Link to="/about" style={styles.subLink}>About</Link>
+              <span style={styles.subDot}>·</span>
+              <Link to="/contact" style={styles.subLink}>Contact</Link>
+            </div>
           </div>
         </div>
       </div>
       <div style={styles.bottom}>
         <div className="jb-section-px" style={styles.bottomInner}>
           <span style={styles.copy}>© 2025 JB Electric. All rights reserved.</span>
-          <span style={styles.copy}>Residential · Commercial · Massachusetts</span>
+          <span style={styles.copy}>Residential · Commercial · Massachusetts &amp; New Hampshire</span>
         </div>
       </div>
     </footer>
@@ -124,6 +125,14 @@ const styles = {
     marginBottom: 12,
     cursor: 'pointer',
     transition: 'color 0.15s',
+    textDecoration: 'none',
+    display: 'block',
+  },
+  areaItem: {
+    fontFamily: "'Manrope', sans-serif",
+    fontSize: 14,
+    color: 'rgba(255,255,255,0.55)',
+    marginBottom: 8,
   },
   phoneBig: {
     fontFamily: "'Archivo', sans-serif",
@@ -149,6 +158,24 @@ const styles = {
     fontFamily: "'Manrope', sans-serif",
     fontSize: 13,
     color: 'rgba(255,255,255,0.35)',
+    marginBottom: 16,
+  },
+  colSubLinks: {
+    display: 'flex',
+    gap: 8,
+    alignItems: 'center',
+  },
+  subLink: {
+    fontFamily: "'Manrope', sans-serif",
+    fontSize: 13,
+    fontWeight: 600,
+    color: 'rgba(255,255,255,0.55)',
+    textDecoration: 'none',
+  },
+  subDot: {
+    fontFamily: "'Manrope', sans-serif",
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.30)',
   },
   bottom: { borderTop: '1px solid rgba(255,255,255,0.06)' },
   bottomInner: {

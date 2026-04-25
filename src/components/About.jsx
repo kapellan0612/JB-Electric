@@ -1,6 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { SERVICES } from './Services';
 
-export default function About({ setScreen }) {
+export default function About() {
+  const navigate = useNavigate();
   return (
     <div>
       {/* Hero */}
@@ -18,7 +20,7 @@ export default function About({ setScreen }) {
           <p style={styles.sub}>
             JB Electric is a Massachusetts-based electrical contractor specializing in residential and commercial work. We're fully insured, licensed, and committed to quality craftsmanship on every job — big or small.
           </p>
-          <button style={styles.cta} onClick={() => setScreen('contact')}>
+          <button style={styles.cta} onClick={() => navigate('/contact')}>
             Get a Free Quote
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
               <line x1="5" y1="12" x2="19" y2="12" />

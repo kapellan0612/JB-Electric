@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import heroElectrician from '../assets/hero-electrician.png';
 import heroMobile from '../assets/mobilehero.png';
 
-export default function Hero({ setScreen }) {
+export default function Hero() {
   const [photoLoaded, setPhotoLoaded] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div style={styles.root}>
@@ -67,7 +69,7 @@ export default function Hero({ setScreen }) {
               <button
                 className="jb-btn-primary jb-btn-inverse-white jb-btn-arrow"
                 style={styles.btnPrimary}
-                onClick={() => setScreen('contact')}
+                onClick={() => navigate('/contact')}
               >
                 Get My Free Estimate
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -75,7 +77,7 @@ export default function Hero({ setScreen }) {
                   <polyline points="12 5 19 12 12 19" />
                 </svg>
               </button>
-              <button className="jb-btn-arrow" style={styles.btnSecondary} onClick={() => setScreen('services')}>
+              <button className="jb-btn-arrow" style={styles.btnSecondary} onClick={() => navigate('/services')}>
                 Or see our services →
               </button>
             </div>
@@ -108,7 +110,7 @@ export default function Hero({ setScreen }) {
                     key={svc}
                     className={`jb-hero-check dc${i + 1}`}
                     style={styles.listItem}
-                    onClick={() => setScreen('services')}
+                    onClick={() => navigate('/services')}
                     onMouseEnter={e => e.currentTarget.style.background = '#F4F8FF'}
                     onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
                   >
@@ -121,7 +123,7 @@ export default function Hero({ setScreen }) {
                   </li>
                 ))}
               </ul>
-              <button className="jb-btn-lift jb-btn-arrow" style={styles.cardCta} onClick={() => setScreen('contact')}>
+              <button className="jb-btn-lift jb-btn-arrow" style={styles.cardCta} onClick={() => navigate('/contact')}>
                 Schedule Service →
               </button>
             </div>

@@ -136,7 +136,7 @@ export default function Contact() {
               <div style={styles.divider} />
               <div style={styles.infoSection}>
                 <div style={styles.infoLabel}>Service Area</div>
-                <div style={styles.infoValue}>Greater Massachusetts</div>
+                <div style={styles.infoValue}>Merrimack Valley, MA &amp;<br />Southern New Hampshire</div>
               </div>
               <div style={styles.infoSection}>
                 <div style={styles.infoLabel}>Hours</div>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import boltIcon from '../assets/bolt-icon.png';
 
 export const SERVICES = [
@@ -52,8 +53,9 @@ export const SERVICES = [
   },
 ];
 
-export default function Services({ setScreen }) {
+export default function Services() {
   const [active, setActive] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <div style={styles.root}>
@@ -73,7 +75,7 @@ export default function Services({ setScreen }) {
           <button
             className="jb-btn-primary jb-btn-inverse"
             style={styles.headerCta}
-            onClick={() => setScreen('contact')}
+            onClick={() => navigate('/contact')}
           >
             Request a Free Quote →
           </button>
@@ -106,7 +108,7 @@ export default function Services({ setScreen }) {
                   <button
                     className="jb-btn-primary"
                     style={styles.quoteBtn}
-                    onClick={e => { e.stopPropagation(); setScreen('contact'); }}
+                    onClick={e => { e.stopPropagation(); navigate('/contact'); }}
                   >
                     Get a Quote →
                   </button>
@@ -134,7 +136,7 @@ export default function Services({ setScreen }) {
             <button
               className="jb-btn-primary"
               style={styles.ctaBtnPrimary}
-              onClick={() => setScreen('contact')}
+              onClick={() => navigate('/contact')}
             >
               Request Free Quote
             </button>
