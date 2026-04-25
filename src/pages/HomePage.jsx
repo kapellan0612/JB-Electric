@@ -1,7 +1,7 @@
 import { Head } from 'vite-react-ssg';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
-import AreasServed from '../components/AreasServed';
+import ServicesCta from '../components/ServicesCta';
 import { SITE_URL, SITE_NAME } from '../config/site';
 
 const TITLE = `${SITE_NAME} — Licensed Electricians in MA & NH | Panel Upgrades, Wiring, EV Chargers`;
@@ -25,7 +25,7 @@ export default function HomePage() {
       </Head>
       <Hero />
       <Services />
-      <AreasServed />
+      <ServicesCta />
     </>
   );
 }

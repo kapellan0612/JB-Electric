@@ -1,6 +1,7 @@
 import { Head } from 'vite-react-ssg';
 import Services from '../components/Services';
 import AreasServed from '../components/AreasServed';
+import ServicesCta from '../components/ServicesCta';
 import { SITE_URL, SITE_NAME } from '../config/site';
 
 const TITLE = `Electrical Services in MA & NH | ${SITE_NAME}`;
@@ -24,6 +25,7 @@ export default function ServicesPage() {
       </Head>
       <Services />
       <AreasServed />
+      <ServicesCta />
     </>
   );
 }
