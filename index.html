@@ -73,6 +73,29 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // Stale-bundle recovery: when cached HTML references asset hashes from an
+      // older deploy, the script/stylesheet 404s and the app never hydrates.
+      // Detect that and reload once (30s cooldown shared with RouteError).
+      (function () {
+        var KEY = 'jb_route_error_reload_at';
+        var COOLDOWN = 30000;
+        window.addEventListener('error', function (e) {
+          var t = e && e.target;
+          if (!t || t === window) return;
+          var isAsset =
+            (t.tagName === 'SCRIPT' && t.src) ||
+            (t.tagName === 'LINK' && t.rel === 'stylesheet' && t.href);
+          if (!isAsset) return;
+          try {
+            var last = Number(sessionStorage.getItem(KEY) || 0);
+            if (Date.now() - last < COOLDOWN) return;
+            sessionStorage.setItem(KEY, String(Date.now()));
+          } catch (_) {}
+          window.location.reload();
+        }, true);
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
