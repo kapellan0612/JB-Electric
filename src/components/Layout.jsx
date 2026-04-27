@@ -4,12 +4,12 @@ import Header from './Header';
 import Footer from './Footer';
 
 export default function Layout() {
-  const { pathname } = useLocation();
+  const { pathname, key } = useLocation();
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [pathname]);
+    window.scrollTo(0, 0);
+  }, [pathname, key]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
