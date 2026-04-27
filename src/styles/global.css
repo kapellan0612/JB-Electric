@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,900;1,700&family=Manrope:wght@400;500;600;700&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; font-family: 'Manrope', sans-serif; background: #F4F6FB; overflow-x: hidden; max-width: 100%; }
+html, body { height: 100%; font-family: 'Manrope', sans-serif; background: #F4F6FB; overflow-x: clip; max-width: 100%; }
 #root { min-height: 100%; display: flex; flex-direction: column; }
 input, select, textarea, button { font-family: inherit; }
 ::-webkit-scrollbar { width: 6px; }

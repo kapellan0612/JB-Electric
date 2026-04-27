@@ -9,6 +9,8 @@ export default function Layout() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     window.scrollTo(0, 0);
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
   }, [pathname, key]);
 
   useEffect(() => {
