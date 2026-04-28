@@ -37,11 +37,11 @@ export default function About() {
             { n: 'Fully', l: 'Insured' },
             { n: 'MA', l: 'Licensed' },
             { n: '$0', l: 'Estimate Cost' },
-            { n: 'Res +', l: 'Commercial' },
+            { n: 'Residential', l: 'Commercial', bigLabel: true },
           ].map((s, i) => (
             <div key={i} style={{ ...styles.statItem, ...(i < 3 ? styles.statBorder : {}) }}>
               <div style={styles.statNum}>{s.n}</div>
-              <div style={styles.statLabel}>{s.l}</div>
+              <div style={s.bigLabel ? styles.statNum : styles.statLabel}>{s.l}</div>
             </div>
           ))}
         </div>
