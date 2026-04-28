@@ -165,11 +165,12 @@ const styles = {
   statNum: {
     fontFamily: "'Archivo',sans-serif",
     fontWeight: 900,
-    fontSize: 36,
+    fontSize: 28,
     color: '#FFD00E',
     letterSpacing: '-0.02em',
     marginBottom: 4,
     lineHeight: 1.1,
+    whiteSpace: 'nowrap',
   },
   statLabel: {
     fontFamily: "'Manrope',sans-serif",
