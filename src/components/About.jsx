@@ -37,7 +37,7 @@ export default function About() {
             { n: 'Fully', l: 'Insured' },
             { n: 'MA + NH', l: 'Licensed' },
             { n: '$0', l: 'Estimate Cost' },
-            { n: 'ALL PROPERTY TYPES', l: 'Residential and Commercial' },
+            { n: 'Res. + Commercial', l: 'All Property Types' },
           ].map((s, i) => (
             <div key={i} style={{ ...styles.statItem, ...(i < 3 ? styles.statBorder : {}) }}>
               <div style={styles.statNum}>{s.n}</div>
