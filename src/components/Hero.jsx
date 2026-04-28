@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import heroElectrician from '../assets/hero-electrician.png';
 import heroMobile from '../assets/mobilehero.png';
 
@@ -15,19 +15,18 @@ export default function Hero() {
           style={{ ...styles.photoWrap, ...(photoLoaded ? {} : { background: '#0E2A5C' }) }}
           className={photoLoaded ? '' : 'jb-img-shimmer'}
         >
-          <img
-            className={`jb-hero-photo jb-hero-photo-desktop ${photoLoaded ? 'jb-img-loaded' : ''}`}
-            src={heroElectrician}
-            alt=""
-            style={{ ...styles.photoImg, opacity: photoLoaded ? undefined : 0 }}
-            onLoad={() => setPhotoLoaded(true)}
-          />
-          <img
-            className="jb-hero-photo-mobile"
-            src={heroMobile}
-            alt=""
-            style={styles.photoImg}
-          />
+          <picture>
+            <source media="(max-width: 900px)" srcSet={heroMobile} />
+            <img
+              className={`jb-hero-photo ${photoLoaded ? 'jb-img-loaded' : ''}`}
+              src={heroElectrician}
+              alt=""
+              fetchpriority="high"
+              decoding="async"
+              style={{ ...styles.photoImg, opacity: photoLoaded ? undefined : 0 }}
+              onLoad={() => setPhotoLoaded(true)}
+            />
+          </picture>
         </div>
 
         {/* Left navy gradient overlay — desktop only */}
@@ -106,20 +105,21 @@ export default function Hero() {
               </div>
               <ul style={styles.list}>
                 {['Electrical Installations', 'Lighting Solutions', 'Wiring & Rewiring', 'EV Charger Installs', 'Panel Upgrades', 'Electrical Repairs'].map((svc, i) => (
-                  <li
-                    key={svc}
-                    className={`jb-hero-check dc${i + 1}`}
-                    style={styles.listItem}
-                    onClick={() => navigate('/services')}
-                    onMouseEnter={e => e.currentTarget.style.background = '#F4F8FF'}
-                    onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
-                  >
-                    <span style={styles.check}>
-                      <svg width="12" height="12" viewBox="0 0 13 13" fill="none">
-                        <polyline points="2,7 5,10 11,3" stroke="#0E2A5C" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    {svc}
+                  <li key={svc} style={styles.listItemWrap}>
+                    <Link
+                      to="/services"
+                      className={`jb-hero-check dc${i + 1}`}
+                      style={styles.listItem}
+                      onMouseEnter={e => e.currentTarget.style.background = '#F4F8FF'}
+                      onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
+                    >
+                      <span style={styles.check}>
+                        <svg width="12" height="12" viewBox="0 0 13 13" fill="none">
+                          <polyline points="2,7 5,10 11,3" stroke="#0E2A5C" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </span>
+                      {svc}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -270,6 +270,7 @@ const styles = {
     color: '#2E5AAA', textTransform: 'uppercase', letterSpacing: '0.12em',
   },
   list: { listStyle: 'none', margin: 0, padding: '6px 0' },
+  listItemWrap: { listStyle: 'none' },
   listItem: {
     display: 'flex', alignItems: 'center', gap: 12,
     padding: '10px 6px',
@@ -277,6 +278,7 @@ const styles = {
     color: '#0E2A5C', cursor: 'pointer',
     borderRadius: 6,
     transition: 'background 0.15s',
+    textDecoration: 'none',
   },
   check: {
     width: 22, height: 22, borderRadius: '50%', background: '#FFD00E',

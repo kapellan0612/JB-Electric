@@ -10,7 +10,23 @@ input, select, textarea, button { font-family: inherit; }
 
 /* ─── Reduce motion ─── */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  .jb-rise,
+  .jb-hero-pop,
+  .jb-hero-line,
+  .jb-hero-fade,
+  .jb-hero-card-in,
+  .jb-hero-check,
+  .jb-hero-trust,
+  .jb-hero-photo {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
 }
 
 /* ─── Micro-interactions ─── */
@@ -443,10 +459,6 @@ input, select, textarea, button { font-family: inherit; }
   font-size: 66px;
 }
 
-/* Hero photo swap */
-.jb-hero-photo-desktop { display: block !important; }
-.jb-hero-photo-mobile  { display: none !important; }
-
 /* Mobile gradient overlay (hidden on desktop) */
 .jb-hero-mobile-gradient { display: none; }
 
@@ -476,8 +488,6 @@ input, select, textarea, button { font-family: inherit; }
   .jb-hamburger         { display: flex; align-items: center; justify-content: center; margin-left: auto; }
   .jb-mobile-menu       { display: flex; flex-direction: column; padding: 12px 20px 20px; background: rgba(14,42,92,0.98); border-top: 1px solid rgba(255,208,14,0.15); gap: 2px; }
 
-  .jb-hero-photo-desktop { display: none !important; }
-  .jb-hero-photo-mobile  { display: block !important; }
   .jb-hero-leftfade      { display: none !important; }
   .jb-hero-mobile-gradient {
     display: block;

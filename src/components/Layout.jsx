@@ -16,23 +16,36 @@ export default function Layout() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
-    const observer = new IntersectionObserver(
+    const intersection = new IntersectionObserver(
       entries => entries.forEach(e => {
         if (e.isIntersecting) {
           e.target.classList.add('jb-in');
-          observer.unobserve(e.target);
+          intersection.unobserve(e.target);
         }
       }),
       { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
     );
 
-    const scan = () => {
-      document.querySelectorAll('.jb-rise:not(.jb-in)').forEach(el => observer.observe(el));
+    const observe = root => {
+      root.querySelectorAll('.jb-rise:not(.jb-in)').forEach(el => intersection.observe(el));
     };
 
-    scan();
-    const interval = setInterval(scan, 300);
-    return () => { clearInterval(interval); observer.disconnect(); };
+    observe(document);
+
+    const mutation = new MutationObserver(records => {
+      for (const r of records) {
+        r.addedNodes.forEach(node => {
+          if (node.nodeType !== 1) return;
+          if (node.classList?.contains('jb-rise') && !node.classList.contains('jb-in')) {
+            intersection.observe(node);
+          }
+          observe(node);
+        });
+      }
+    });
+    mutation.observe(document.body, { childList: true, subtree: true });
+
+    return () => { mutation.disconnect(); intersection.disconnect(); };
   }, [pathname]);
 
   return (

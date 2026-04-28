@@ -86,8 +86,11 @@ export default function Services() {
         {SERVICES.map((svc, idx) => {
           const isActive = active === svc.id;
           return (
-            <div
+            <button
+              type="button"
               key={svc.id}
+              aria-expanded={isActive}
+              aria-controls={`svc-panel-${svc.id}`}
               className={`jb-service-card jb-rise s${idx + 1}`}
               style={{ ...styles.card, ...(isActive ? styles.cardActive : {}) }}
               onClick={() => setActive(isActive ? null : svc.id)}
@@ -99,23 +102,26 @@ export default function Services() {
                 </div>
               </div>
               <h3 style={{ ...styles.cardTitle, ...(isActive ? { color: '#fff' } : {}) }}>{svc.title}</h3>
-              <p style={{ ...styles.cardText, ...(isActive ? { color: 'rgba(255,255,255,0.65)' } : {}) }}>
+              <p id={`svc-panel-${svc.id}`} style={{ ...styles.cardText, ...(isActive ? { color: 'rgba(255,255,255,0.65)' } : {}) }}>
                 {isActive ? svc.long : svc.short}
               </p>
               <div style={{ ...styles.cardFooter, ...(isActive ? { borderTopColor: 'rgba(255,208,14,0.15)' } : {}) }}>
                 {isActive ? (
-                  <button
+                  <span
+                    role="button"
+                    tabIndex={0}
                     className="jb-btn-primary"
                     style={styles.quoteBtn}
                     onClick={e => { e.stopPropagation(); navigate('/contact'); }}
+                    onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); navigate('/contact'); } }}
                   >
                     Get an Estimate →
-                  </button>
+                  </span>
                 ) : (
                   <span className="jb-learn-more" style={styles.learnMore}>Learn more →</span>
                 )}
               </div>
-            </div>
+            </button>
           );
         })}
       </div>
@@ -194,11 +200,16 @@ const styles = {
     padding: '36px 28px',
     cursor: 'pointer',
     transition: 'all 0.2s',
+    border: 'none',
     borderRight: '1px solid rgba(14,42,92,0.08)',
     background: '#fff',
     display: 'flex',
     flexDirection: 'column',
     gap: 12,
+    textAlign: 'left',
+    font: 'inherit',
+    color: 'inherit',
+    width: '100%',
   },
   cardActive: {
     background: '#0E2A5C',

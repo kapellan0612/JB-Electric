@@ -5,6 +5,34 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const MAX = { name: 100, email: 200, phone: 30, service: 100, message: 5000 };
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const RATE_WINDOW_MS = 60_000;
+const RATE_MAX = 5;
+const rateBuckets = new Map();
+
+const getClientIp = (req) => {
+  const fwd = req.headers['x-forwarded-for'];
+  if (typeof fwd === 'string' && fwd.length) return fwd.split(',')[0].trim();
+  return req.headers['x-real-ip'] || req.socket?.remoteAddress || 'unknown';
+};
+
+const checkRate = (ip) => {
+  const now = Date.now();
+  const cutoff = now - RATE_WINDOW_MS;
+  const hits = (rateBuckets.get(ip) || []).filter(t => t > cutoff);
+  if (hits.length >= RATE_MAX) {
+    rateBuckets.set(ip, hits);
+    return { ok: false, retryAfter: Math.ceil((hits[0] + RATE_WINDOW_MS - now) / 1000) };
+  }
+  hits.push(now);
+  rateBuckets.set(ip, hits);
+  if (rateBuckets.size > 5000) {
+    for (const [k, v] of rateBuckets) {
+      if (!v.length || v[v.length - 1] < cutoff) rateBuckets.delete(k);
+    }
+  }
+  return { ok: true };
+};
+
 const escapeHtml = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
 })[c]);
@@ -20,6 +48,12 @@ export default async function handler(req, res) {
   if (!process.env.RESEND_API_KEY || !process.env.CONTACT_FROM_EMAIL || !process.env.CONTACT_TO_EMAIL) {
     console.error('Missing required env vars');
     return res.status(500).json({ error: 'Server not configured' });
+  }
+
+  const rate = checkRate(getClientIp(req));
+  if (!rate.ok) {
+    res.setHeader('Retry-After', String(rate.retryAfter));
+    return res.status(429).json({ error: 'Too many requests. Please wait a moment and try again, or call 978.397.9878.' });
   }
 
   let body = req.body;

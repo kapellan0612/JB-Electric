@@ -78,40 +78,42 @@ export default function Contact() {
             ) : (
               <form onSubmit={handleSubmit} style={styles.form} noValidate>
                 {/* Honeypot — hidden from real users; bots fill it and get silently dropped */}
-                <input
-                  type="text"
-                  name="hp_company"
-                  value={form.hp_company}
-                  onChange={handleChange}
-                  tabIndex={-1}
-                  autoComplete="off"
-                  aria-hidden="true"
-                  style={styles.honeypot}
-                />
+                <div aria-hidden="true" style={styles.honeypot}>
+                  <label htmlFor="hp_company">Company</label>
+                  <input
+                    id="hp_company"
+                    type="text"
+                    name="hp_company"
+                    value={form.hp_company}
+                    onChange={handleChange}
+                    tabIndex={-1}
+                    autoComplete="off"
+                  />
+                </div>
                 {/* jb-form-row handles responsive columns */}
                 <div className="jb-form-row" style={styles.row}>
                   <div style={styles.field}>
-                    <label style={styles.label}>Full Name</label>
-                    <input className="jb-input" name="name" value={form.name} onChange={handleChange}
+                    <label htmlFor="contact-name" style={styles.label}>Full Name</label>
+                    <input id="contact-name" className="jb-input" name="name" autoComplete="name" value={form.name} onChange={handleChange}
                       style={inputStyle('name')}
                       onFocus={() => setFocused('name')} onBlur={() => setFocused(null)} required />
                   </div>
                   <div style={styles.field}>
-                    <label style={styles.label}>Phone</label>
-                    <input className="jb-input" name="phone" value={form.phone} onChange={handleChange}
+                    <label htmlFor="contact-phone" style={styles.label}>Phone</label>
+                    <input id="contact-phone" className="jb-input" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={handleChange}
                       style={inputStyle('phone')}
                       onFocus={() => setFocused('phone')} onBlur={() => setFocused(null)} />
                   </div>
                 </div>
                 <div style={styles.field}>
-                  <label style={styles.label}>Email Address</label>
-                  <input className="jb-input" name="email" type="email" value={form.email} onChange={handleChange}
+                  <label htmlFor="contact-email" style={styles.label}>Email Address</label>
+                  <input id="contact-email" className="jb-input" name="email" type="email" autoComplete="email" value={form.email} onChange={handleChange}
                     style={inputStyle('email')} placeholder="you@example.com"
                     onFocus={() => setFocused('email')} onBlur={() => setFocused(null)} required />
                 </div>
                 <div style={styles.field}>
-                  <label style={styles.label}>Service Needed</label>
-                  <select name="service" value={form.service} onChange={handleChange}
+                  <label htmlFor="contact-service" style={styles.label}>Service Needed</label>
+                  <select id="contact-service" name="service" value={form.service} onChange={handleChange}
                     className="jb-input" style={inputStyle('service')}
                     onFocus={() => setFocused('service')} onBlur={() => setFocused(null)}>
                     <option value="">Select a service…</option>
@@ -123,8 +125,8 @@ export default function Contact() {
                   </select>
                 </div>
                 <div style={styles.field}>
-                  <label style={styles.label}>Message</label>
-                  <textarea className="jb-input" name="message" value={form.message} onChange={handleChange}
+                  <label htmlFor="contact-message" style={styles.label}>Message</label>
+                  <textarea id="contact-message" className="jb-input" name="message" value={form.message} onChange={handleChange}
                     style={{ ...inputStyle('message'), height: 120, resize: 'vertical' }}
                     placeholder="Describe your project or issue…"
                     onFocus={() => setFocused('message')} onBlur={() => setFocused(null)} />
