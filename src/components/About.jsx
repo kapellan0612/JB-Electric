@@ -35,13 +35,13 @@ export default function About() {
         <div className="jb-grid-4col jb-section-px" style={styles.statsInner}>
           {[
             { n: 'Fully', l: 'Insured' },
-            { n: 'MA', l: 'Licensed' },
+            { n: 'MA + NH', l: 'Licensed' },
             { n: '$0', l: 'Estimate Cost' },
-            { n: 'Residential', l: 'Commercial', bigLabel: true },
+            { n: 'ALL PROPERTY TYPES', l: 'Residential and Commercial' },
           ].map((s, i) => (
             <div key={i} style={{ ...styles.statItem, ...(i < 3 ? styles.statBorder : {}) }}>
               <div style={styles.statNum}>{s.n}</div>
-              <div style={s.bigLabel ? styles.statNum : styles.statLabel}>{s.l}</div>
+              <div style={styles.statLabel}>{s.l}</div>
             </div>
           ))}
         </div>
